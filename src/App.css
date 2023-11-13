@@ -1,10 +1,20 @@
 .App {
   text-align: center;
+  background-color: rgb(104, 126, 207);
+  padding-bottom: 30px;;
 }
 
 .app-layout {
   display: flex;
   flex-direction: row;
+  gap: 1rem;
+  margin: 15px;
+}
+
+.temp-lock {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .App-logo {

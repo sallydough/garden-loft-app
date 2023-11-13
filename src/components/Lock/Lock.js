@@ -67,7 +67,6 @@ const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const Lock = () => {
   return (
     <div className="lock-container">
-
       <div className="home-icon-container">
         <h3>Home Security</h3>
         <HomeOutlinedIcon />

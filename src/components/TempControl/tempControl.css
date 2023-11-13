@@ -3,10 +3,11 @@
   flex-direction: row;
   align-items: center;
   object-fit:scale-down;
-  background-color: rgb(232, 225, 213);
+  background-color: rgb(244, 244, 217);
   gap: 2rem;
  padding: 40px;
   width: 11rem;
+  border-radius: 30px;
 }
 
 .temp-control {
@@ -23,4 +24,25 @@
 .temp-settings {
   display: flex;
   flex-direction: row;
+  gap: 0.2rem;
+}
+
+.temp-control h3 {
+  color: rgb(75, 75, 116);
+}
+
+.temp-control h1 {
+  color: orangered;
+} 
+
+.temp-image {
+  color: red;
+}
+
+.temp-settings button {
+  padding: 10px;
+  border-color: transparent;
+  color: rgb(77, 105, 74);
+  background-color: #fff;
+  border-radius: 30px;
 }

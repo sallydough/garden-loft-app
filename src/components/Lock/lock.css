@@ -4,9 +4,10 @@
   align-content: center;
   align-items: center;
   width: 16rem;
-  background-color: rgb(161, 214, 215);
+  background-color: rgb(187, 235, 84);
   padding-top: 40px;
-  padding-bottom: 50px;;
+  padding-bottom: 50px;
+  border-radius: 30px;
 }
 
 .home-icon-container {
