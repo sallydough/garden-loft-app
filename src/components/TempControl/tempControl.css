@@ -2,16 +2,17 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  object-fit:scale-down;
   background-color: rgb(232, 225, 213);
-padding: 40px;
-  width: 20%;
+  gap: 2rem;
+ padding: 40px;
+  width: 11rem;
 }
 
 .temp-control {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
 }
 
 .img-setting-container {

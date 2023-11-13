@@ -1,0 +1,28 @@
+.lock-container{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  width: 16rem;
+  background-color: rgb(134, 190, 192);
+  padding-top: 40px;
+  padding-bottom: 50px;;
+}
+
+.home-icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lock-slider {
+  display: flex;
+  flex-direction: row;
+  align-content:center;
+  padding-top: 30px;
+}
+
+.lock {
+  padding-left: 15px;
+  padding-right: 15px;
+}
