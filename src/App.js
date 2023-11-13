@@ -1,23 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import Logo from './components/Logo/Logo';
+import Call911 from './components/Call911/Call911';
+import TempControl from './components/TempControl/TempControl';
+import Lock from './components/Lock/Lock';
+import Lights from './components/Lights/Lights';
+import Greeting from './components/Greeting/Greeting';
+import Schedule from './components/Schedule/Schedule';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Logo />
+      <Call911 />
+      <TempControl />
+      <Lock />
+      <Lights />
+      <Greeting />
+      <Schedule />
+      
+
     </div>
   );
 }
