@@ -4,7 +4,7 @@
   align-content: center;
   align-items: center;
   width: 16rem;
-  background-color: rgb(134, 190, 192);
+  background-color: rgb(161, 214, 215);
   padding-top: 40px;
   padding-bottom: 50px;;
 }
@@ -18,7 +18,7 @@
 .lock-slider {
   display: flex;
   flex-direction: row;
-  align-content:center;
+  align-items: center;
   padding-top: 30px;
 }
 
