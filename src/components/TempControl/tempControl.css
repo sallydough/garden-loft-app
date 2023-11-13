@@ -1,0 +1,25 @@
+.temp-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgb(232, 225, 213);
+padding: 40px;
+  width: 20%;
+}
+
+.temp-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.img-setting-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.temp-settings {
+  display: flex;
+  flex-direction: row;
+}
