@@ -18,6 +18,15 @@
   gap: 1rem;
 }
 
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 2rem;
+  background-color: rgb(34, 63, 94);
+}
+
 
 .App-header {
   background-color: #282c34;

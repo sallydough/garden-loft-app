@@ -5,7 +5,7 @@ import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 
 const Call911 = () => {
   return (
-    <div>
+    <div className='button-container1'>
       <Button variant="contained" startIcon={<LocalHospitalIcon />}>
         Call 911
       </Button>
