@@ -1,7 +1,8 @@
+
 .App {
   text-align: center;
-  background-color: rgb(104, 126, 207);
-  padding-bottom: 30px;;
+  background-color: #AED5CA;
+  padding-bottom: 30px;
 }
 
 .app-layout {
@@ -17,16 +18,6 @@
   gap: 1rem;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
 .App-header {
   background-color: #282c34;

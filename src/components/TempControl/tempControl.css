@@ -3,8 +3,8 @@
   flex-direction: row;
   align-items: center;
   object-fit:scale-down;
-  background-color: rgb(244, 244, 217);
-  gap: 2rem;
+  background-color: rgb(221, 221, 200);
+  gap: 1rem;
  padding: 40px;
   width: 11rem;
   border-radius: 30px;
@@ -16,9 +16,10 @@
   align-items: center;
 }
 
-.img-setting-container {
+.img-settings-container {
   display: flex;
   flex-direction: column;
+  gap: 3rem;
 }
 
 .temp-settings {
