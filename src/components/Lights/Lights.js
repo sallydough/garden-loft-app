@@ -5,8 +5,6 @@ import TungstenIcon from "@mui/icons-material/Tungsten";
 import { styled } from "@mui/material/styles";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
-
-
 const IOSSwitch = styled((props: SwitchProps) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
 ))(({ theme }) => ({
@@ -70,73 +68,129 @@ const Lights = () => {
         <div className="house-label">
           <h3>Living Room</h3>
         </div>
-        <div className="light-device">
-          <p>Device 1</p>
-          <div className="light-slider">
-            <h3 className="on">On</h3>
-            <FormControlLabel
-              control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-            />
-            <h3 className="off">Off</h3>
+        <div className="light-device-container">
+          <div className="light-device">
+            <p>Device 1</p>
+            <div className="light-slider">
+              <h3 className="on">On</h3>
+              <FormControlLabel
+                control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+              />
+              <h3 className="off">Off</h3>
+            </div>
+          </div>
+          <div className="light-device">
+            <p>Device 2</p>
+            <div className="light-slider">
+              <h3 className="on">On</h3>
+              <FormControlLabel
+                control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+              />
+              <h3 className="off">Off</h3>
+            </div>
+          </div>
+          <div className="light-device">
+            <p>Device 3</p>
+            <div className="light-slider">
+              <h3 className="on">On</h3>
+              <FormControlLabel
+                control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+              />
+              <h3 className="off">Off</h3>
+            </div>
           </div>
         </div>
       </div>
-
       <div className="room-light">
         <div className="house-label">
           <h3>Dining Room</h3>
         </div>
-        <div className="light-device">
-          <p>Device 1</p>
-          <div className="light-slider">
-            <h3 className="on">On</h3>
-            <FormControlLabel
-              control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-            />
-            <h3 className="off">Off</h3>
+        <div className="light-device-container">
+          <div className="light-device">
+            <p>Device 1</p>
+            <div className="light-slider">
+              <h3 className="on">On</h3>
+              <FormControlLabel
+                control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+              />
+              <h3 className="off">Off</h3>
+            </div>
+          </div>
+          <div className="light-device">
+            <p>Device 2</p>
+            <div className="light-slider">
+              <h3 className="on">On</h3>
+              <FormControlLabel
+                control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+              />
+              <h3 className="off">Off</h3>
+            </div>
           </div>
         </div>
       </div>
-
       <div className="room-light">
         <div className="house-label">
-          <h3>Bedroom</h3>
+          <h3>Bed Room</h3>
         </div>
-        <div className="light-device">
-          <p>Device 1</p>
-          <div className="light-slider">
-            <h3 className="on">On</h3>
-            <FormControlLabel
-              control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-            />
-            <h3 className="off">Off</h3>
+        <div className="light-device-container">
+          <div className="light-device">
+            <p>Device 1</p>
+            <div className="light-slider">
+              <h3 className="on">On</h3>
+              <FormControlLabel
+                control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+              />
+              <h3 className="off">Off</h3>
+            </div>
           </div>
-        </div>
-        <div className="light-device">
-          <p>Device 2</p>
-          <div className="light-slider">
-            <h3 className="on">On</h3>
-            <FormControlLabel
-              control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-            />
-            <h3 className="off">Off</h3>
+          <div className="light-device">
+            <p>Device 2</p>
+            <div className="light-slider">
+              <h3 className="on">On</h3>
+              <FormControlLabel
+                control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+              />
+              <h3 className="off">Off</h3>
+            </div>
+          </div>
+          <div className="light-device">
+            <p>Device 3</p>
+            <div className="light-slider">
+              <h3 className="on">On</h3>
+              <FormControlLabel
+                control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+              />
+              <h3 className="off">Off</h3>
+            </div>
           </div>
         </div>
       </div>
-
       <div className="room-light">
         <div className="house-label">
           <h3>Bathroom</h3>
         </div>
-        <div className="light-device">
-          <p>Device 1</p>
-          <div className="light-slider">
-            <h3 className="on">On</h3>
-            <FormControlLabel
-              control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-            />
-            <h3 className="off">Off</h3>
+        <div className="light-device-container">
+          <div className="light-device">
+            <p>Device 1</p>
+            <div className="light-slider">
+              <h3 className="on">On</h3>
+              <FormControlLabel
+                control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+              />
+              <h3 className="off">Off</h3>
+            </div>
           </div>
+          <div className="light-device">
+            <p>Device 1</p>
+            <div className="light-slider">
+              <h3 className="on">On</h3>
+              <FormControlLabel
+                control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+              />
+              <h3 className="off">Off</h3>
+            </div>
+          </div>
+          
         </div>
       </div>
     </div>

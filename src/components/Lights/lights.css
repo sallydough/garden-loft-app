@@ -1,12 +1,8 @@
 .lights-container{
   display: flex;
   flex-direction: column;
-  align-content: center;
-  align-items: center;
-  width: 16rem;
   background-color: rgb(35, 56, 90);
-  padding-top: 40px;
-  padding-bottom: 50px;
+  padding: 50px;
   border-radius: 30px;
 }
 
@@ -39,10 +35,22 @@
   padding-bottom: 5px;
 }
 
+.light-device-container {
+display: flex;
+gap: 1rem;
+flex-wrap: wrap;
+
+}
+
 .light-device {
+
   text-align: left;
   line-height: 2px;
-  color: #fff;
+  color: #525252;
+  background-color: rgb(209, 209, 209);
+  padding: 30px;
+  border-radius: 20px;
+  
 }
 
 .house-label h3 {
