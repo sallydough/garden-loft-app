@@ -117,7 +117,7 @@ const Lights = () => {
             </div>
           </div>
           <div className="light-device">
-            <p>Device 2</p>
+            <p>Head Light 2</p>
             <div className="light-slider">
               <h3 className="on">On</h3>
               <FormControlLabel
