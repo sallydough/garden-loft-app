@@ -6,7 +6,7 @@ import Weather from "./Weather";
 const Greeting = () => {
   return (
     <div className="welcome-container">
-      <h1>Welcome Elizabeth!</h1>
+      <h1>Good Morning!</h1>
       <DateTime />
       <Weather />
     </div>
