@@ -20,7 +20,7 @@ const data: Item[] = [
 ];
 
 const Item: React.FC<{ item: Item; index: number }> = ({ item, index }) => (
-  <View style={[styles.item, { backgroundColor: index === 2 ? 'yellow' : 'grey' }]}>
+  <View style={[styles.item, { backgroundColor: index === 3 ? '#f3b718' : 'grey' }]}>
     <MaterialIcons name={item.icon} size={32} color="white" />
     <Text style={styles.title}>{item.title}</Text>
   </View>
@@ -46,8 +46,6 @@ const MyCarousel: React.FC = () => {
         sliderWidth={viewportWidth}
         itemWidth={viewportWidth * 0.2} // Adjusted to show 5 cards at a time
         loop={true}
-        autoplay={true}
-        autoplayInterval={3000}
         activeSlideAlignment="center" // Center mode
         renderArrow={renderArrow}
         inactiveSlideScale={0.8} // Scale of inactive slides

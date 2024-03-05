@@ -11,16 +11,16 @@ interface Item {
 }
 
 const data: Item[] = [
-  { title: 'Card 1', icon: 'home' },
-  { title: 'Card 2', icon: 'work' },
-  { title: 'Card 3', icon: 'school' },
-  { title: 'Card 4', icon: 'star' },
-  { title: 'Card 5', icon: 'favorite' },
-  { title: 'Card 6', icon: 'account-circle' },
+  { title: 'CONTACTS', icon: 'home' },
+  { title: 'ACTIVITIES', icon: 'work' },
+  { title: 'LIGHTS', icon: 'school' },
+  { title: 'ENTERTAINMENT', icon: 'star' },
+  { title: 'GALLERY', icon: 'favorite' },
+  { title: 'GARDEN LOFT', icon: 'account-circle' },
 ];
 
 const Item: React.FC<{ item: Item; index: number }> = ({ item, index }) => (
-  <View style={[styles.item, { backgroundColor: index === 2 ? 'yellow' : 'grey' }]}>
+  <View style={[styles.item, { backgroundColor: index === 3 ? '#f3b718' : '#f09030' }]}>
     <MaterialIcons name={item.icon} size={32} color="white" />
     <Text style={styles.title}>{item.title}</Text>
   </View>
@@ -44,10 +44,8 @@ const CarouselTwo: React.FC = () => {
         data={data}
         renderItem={renderItem}
         sliderWidth={viewportWidth}
-        itemWidth={viewportWidth * 0.2} // Adjusted to show 5 cards at a time
+        itemWidth={viewportWidth * 0.3} // Adjusted to show 3 cards at a time
         loop={true}
-        autoplay={true}
-        autoplayInterval={3000}
         activeSlideAlignment="center" // Center mode
         renderArrow={renderArrow}
         inactiveSlideScale={0.8} // Scale of inactive slides
@@ -63,7 +61,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   item: {
-    width: viewportWidth * 0.2, // Adjusted to show 5 cards at a time
+    width: viewportWidth * 0.3, // Adjusted to show 3 cards at a time
     height: viewportHeight * 0.3,
     justifyContent: 'center',
     alignItems: 'center',
