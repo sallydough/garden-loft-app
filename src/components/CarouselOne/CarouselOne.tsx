@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useState,useRef } from "react";
 import {
   View,
-  Text,
+  Text, ScrollView,
   StyleSheet,
   Dimensions,
-  TouchableOpacity,
+  TouchableOpacity, Linking,
 } from "react-native";
 import Carousel from "react-native-snap-carousel";
 import { MaterialIcons } from "@expo/vector-icons"; // Assuming you're using Expo for icons
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons'; // Import FontAwesome icons
 import VideoCall from "../VideoCall/VideoCall";
 
 
@@ -61,24 +62,42 @@ const MyCarousel: React.FC = () => {
     }
   };
 
-  const renderArrow = (
-    direction: "left" | "right",
-    onPress: () => void
-  ) => (
-    <TouchableOpacity
-      style={[
-        styles.arrowContainer,
-        direction === "left" ? styles.leftArrow : styles.rightArrow,
-      ]}
-      onPress={onPress}
-    >
-      <MaterialIcons
-        name={direction === "left" ? "chevron-left" : "chevron-right"}
-        size={24}
-        color="black"
-      />
-    </TouchableOpacity>
-  );
+  // const renderArrow = (
+  //   direction: "left" | "right",
+  //   onPress: () => void
+  // ) => (
+  //   <TouchableOpacity
+  //     style={[
+  //       styles.arrowContainer,
+  //       direction === "left" ? styles.leftArrow : styles.rightArrow,
+  //     ]}
+  //     onPress={onPress}
+  //   >
+  //     <MaterialIcons
+  //       name={direction === "left" ? "chevron-left" : "chevron-right"}
+  //       size={24}
+  //       color="black"
+  //     />
+  //   </TouchableOpacity>
+  // );
+
+  const scrollViewRef = useRef<ScrollView>(null);
+
+  const scrollToNext = () => {
+    if (scrollViewRef.current) {
+      const currentIndex = scrollViewRef.current.currentIndex || 0;
+      const nextIndex = currentIndex + 1;
+      scrollViewRef.current.snapToItem(nextIndex, true, true);
+    }
+  };
+  
+  const scrollToPrevious = () => {
+    if (scrollViewRef.current) {
+      const currentIndex = scrollViewRef.current.currentIndex || 0;
+      const prevIndex = currentIndex - 1;
+      scrollViewRef.current.snapToItem(prevIndex, true, true);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -90,10 +109,16 @@ const MyCarousel: React.FC = () => {
         itemWidth={viewportWidth * 0.17} // Adjusted to show 5 cards at a time
         loop={true}
         activeSlideAlignment="center" // Center mode
-        renderArrow={renderArrow}
+        ref={(c) => { scrollViewRef.current = c; }}
         inactiveSlideScale={0.8} // Scale of inactive slides
         inactiveSlideOpacity={1} // Opacity of inactive slides
       />
+           <TouchableOpacity style={styles.arrowLeft} onPress={scrollToPrevious}>
+        <FontAwesome name="angle-left" size={74} color="black" />
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.arrowRight} onPress={scrollToNext}>
+        <FontAwesome name="angle-right" size={74} color="black" />
+      </TouchableOpacity>
       {showVideoCall && <VideoCall />}
     </View>
   );
@@ -103,10 +128,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+    marginTop: 70
   },
   item: {
     width: viewportWidth * 0.18, // Adjusted to show 5 cards at a time
-    height: viewportHeight * 0.3,
+    height: viewportHeight * 0.25,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
@@ -120,17 +146,17 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     color: "white",
   },
-  arrowContainer: {
-    position: "absolute",
-    top: "50%",
-    paddingHorizontal: 10,
-    zIndex: 1,
+  arrowLeft: {
+    position: 'absolute',
+    top: '15%',
+    left: 0,
+    transform: [{ translateY: -10 }],
   },
-  leftArrow: {
-    left: 10,
-  },
-  rightArrow: {
-    right: 10,
+  arrowRight: {
+    position: 'absolute',
+    top: '15%',
+    right: -10,
+    transform: [{ translateY: -10 }],
   },
 });
 

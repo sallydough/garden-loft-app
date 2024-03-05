@@ -43,7 +43,7 @@ const VideoCallCarousel: React.FC = () => {
       key={item.id}
       style={styles.cardContainer}
       onPress={() => handleCall(item.phoneNumber)}>
-      <FontAwesome name="video-camera" size={24} color="white" />
+      <FontAwesome name="video-camera" size={44} color="white" />
       <Text style={styles.cardText}>{item.name}</Text>
     </TouchableOpacity>
   );
@@ -54,7 +54,7 @@ const VideoCallCarousel: React.FC = () => {
        layout={'default'}
        data={contacts}
        renderItem={renderItem}
-       sliderWidth={viewportWidth * 0.85}
+       sliderWidth={viewportWidth * 0.90}
        itemWidth={viewportWidth * 0.3}
        loop={true}
        activeSlideAlignment="center"
@@ -64,10 +64,10 @@ const VideoCallCarousel: React.FC = () => {
       />
 
       <TouchableOpacity style={styles.arrowLeft} onPress={scrollToPrevious}>
-        <FontAwesome name="angle-left" size={24} color="black" />
+        <FontAwesome name="angle-left" size={74} color="black" />
       </TouchableOpacity>
       <TouchableOpacity style={styles.arrowRight} onPress={scrollToNext}>
-        <FontAwesome name="angle-right" size={24} color="black" />
+        <FontAwesome name="angle-right" size={74} color="black" />
       </TouchableOpacity>
     </View>
   );
@@ -76,12 +76,13 @@ const VideoCallCarousel: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     position: 'relative',
-    height: 100,
+    height: 290,
+    alignItems: 'center',
   },
   cardContainer: {
-    width: 120,
-    height: 80,
-    backgroundColor: 'goldenrod',
+    width: viewportWidth * 0.3, // Adjusted to show 3 cards at a time
+    height: viewportHeight * 0.3,
+    backgroundColor: '#f09030',
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
@@ -95,13 +96,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '50%',
     left: 0,
-    transform: [{ translateY: -12 }],
+    transform: [{ translateY: -50 }],
   },
   arrowRight: {
     position: 'absolute',
     top: '50%',
-    right: 0,
-    transform: [{ translateY: -12 }],
+    right: -10,
+    transform: [{ translateY: -50 }],
   },
 });
 
