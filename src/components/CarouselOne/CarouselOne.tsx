@@ -135,8 +135,9 @@ const styles = StyleSheet.create({
     height: viewportHeight * 0.25,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 10,
+    borderRadius: 60,
     flexDirection: "column",
+    gap: 10,
     paddingHorizontal: 10,
 
   },
