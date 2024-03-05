@@ -48,7 +48,7 @@ const MyCarousel: React.FC = () => {
           { backgroundColor: index === 3 ? "#f3b718" : "grey" },
         ]}
       >
-        <MaterialCommunityIcons name={item.icon} size={32} color="white" />
+        <MaterialCommunityIcons name={item.icon} size={72} color="white" />
         <Text style={styles.title}>{item.title}</Text>
       </View>
     </TouchableOpacity>
