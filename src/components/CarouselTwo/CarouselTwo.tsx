@@ -43,7 +43,7 @@ const CarouselTwo: React.FC = () => {
         layout={'default'}
         data={data}
         renderItem={renderItem}
-        sliderWidth={viewportWidth}
+        sliderWidth={viewportWidth * 0.85}
         itemWidth={viewportWidth * 0.3} // Adjusted to show 3 cards at a time
         loop={true}
         activeSlideAlignment="center" // Center mode
