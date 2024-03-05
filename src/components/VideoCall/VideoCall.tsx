@@ -18,22 +18,20 @@ const VideoCallCarousel: React.FC = () => {
 
   const scrollToNext = () => {
     if (scrollViewRef.current) {
-      scrollViewRef.current.scrollTo({
-        x: scrollViewRef.current.contentOffset.x + 120, // Adjust this value based on the card width
-        animated: true,
-      });
+      const currentIndex = scrollViewRef.current.currentIndex || 0;
+      const nextIndex = currentIndex + 1;
+      scrollViewRef.current.snapToItem(nextIndex, true, true);
     }
   };
-
+  
   const scrollToPrevious = () => {
     if (scrollViewRef.current) {
-      const newIndex = Math.max(0, Math.round(scrollViewRef.current.contentOffset.x / 120) - 1);
-      scrollViewRef.current.scrollTo({
-        x: newIndex * 120,
-        animated: true,
-      });
+      const currentIndex = scrollViewRef.current.currentIndex || 0;
+      const prevIndex = currentIndex - 1;
+      scrollViewRef.current.snapToItem(prevIndex, true, true);
     }
   };
+  
 
   const handleCall = (phoneNumber: string) => {
     const url = `tel:${phoneNumber}`;
@@ -52,18 +50,19 @@ const VideoCallCarousel: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Carousel
-        layout={'default'}
-        data={contacts}
-        renderItem={renderItem}
-        sliderWidth={viewportWidth * 0.85}
-        itemWidth={viewportWidth * 0.3}
-        loop={true}
-        activeSlideAlignment="center"
-        ref={scrollViewRef}
-        inactiveSlideScale={0.8}
-        inactiveSlideOpacity={1}
+    <Carousel
+       layout={'default'}
+       data={contacts}
+       renderItem={renderItem}
+       sliderWidth={viewportWidth * 0.85}
+       itemWidth={viewportWidth * 0.3}
+       loop={true}
+       activeSlideAlignment="center"
+       ref={(c) => { scrollViewRef.current = c; }}
+       inactiveSlideScale={0.8}
+       inactiveSlideOpacity={1}
       />
+
       <TouchableOpacity style={styles.arrowLeft} onPress={scrollToPrevious}>
         <FontAwesome name="angle-left" size={24} color="black" />
       </TouchableOpacity>
