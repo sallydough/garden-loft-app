@@ -1,6 +1,5 @@
 import { StyleSheet , Text, View } from 'react-native';
 
-import EditScreenInfo from '@/src/components/EditScreenInfo';
 import CarouselOne from '@/src/components/CarouselOne/CarouselOne';
 import CarouselTwo from '@/src/components/CarouselTwo/CarouselTwo';
 import HelpButton from '@/src/components/HelpButton/CarouselTwo';
