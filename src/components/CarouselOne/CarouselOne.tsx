@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -9,6 +9,8 @@ import {
 import Carousel from "react-native-snap-carousel";
 import { MaterialIcons } from "@expo/vector-icons"; // Assuming you're using Expo for icons
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import VideoCall from "../VideoCall/VideoCall";
+
 
 const { width: viewportWidth, height: viewportHeight } =
   Dimensions.get("window");
@@ -27,25 +29,42 @@ const data: Item[] = [
   { title: "LIGHTS", icon: "lightbulb" },
 ];
 
-const Item: React.FC<{ item: Item; index: number }> = ({ item, index }) => (
-  <View
-    style={[styles.item, { backgroundColor: index === 3 ? "#f3b718" : "grey" }]}
-  >
-    <MaterialCommunityIcons name={item.icon} size={80} color="white" />
-    <Text style={styles.title}>{item.title}</Text>
-  </View>
-);
 
 const MyCarousel: React.FC = () => {
+  const [showVideoCall, setShowVideoCall] = useState(false);
+
   const renderItem: ({
     item,
     index,
   }: {
     item: Item;
     index: number;
-  }) => JSX.Element = ({ item, index }) => <Item item={item} index={index} />;
+  }) => JSX.Element = ({ item, index }) => (
+    <TouchableOpacity onPress={() => handleCardPress(item.title)}>
+      <View
+        style={[
+          styles.item,
+          { backgroundColor: index === 3 ? "#f3b718" : "grey" },
+        ]}
+      >
+        <MaterialCommunityIcons name={item.icon} size={32} color="white" />
+        <Text style={styles.title}>{item.title}</Text>
+      </View>
+    </TouchableOpacity>
+  );
 
-  const renderArrow = (direction: "left" | "right", onPress: () => void) => (
+  const handleCardPress = (title: string) => {
+    if (title === "VIDEO CALL") {
+      setShowVideoCall(true);
+    } else {
+      setShowVideoCall(false);
+    }
+  };
+
+  const renderArrow = (
+    direction: "left" | "right",
+    onPress: () => void
+  ) => (
     <TouchableOpacity
       style={[
         styles.arrowContainer,
@@ -75,6 +94,7 @@ const MyCarousel: React.FC = () => {
         inactiveSlideScale={0.8} // Scale of inactive slides
         inactiveSlideOpacity={1} // Opacity of inactive slides
       />
+      {showVideoCall && <VideoCall />}
     </View>
   );
 };
