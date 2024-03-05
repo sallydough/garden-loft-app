@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { MaterialIcons } from '@expo/vector-icons'; // Assuming you're using Expo for icons
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
 
@@ -26,14 +27,14 @@ const Item: React.FC<{ item: Item; index: number }> = ({ item, index }) => (
   </View>
 );
 
-const CarouselTwo: React.FC = () => {
+const Activities: React.FC = () => {
   const renderItem: ({ item, index }: { item: Item; index: number }) => JSX.Element = ({ item, index }) => (
     <Item item={item} index={index} />
   );
 
   const renderArrow = (direction: 'left' | 'right', onPress: () => void) => (
     <TouchableOpacity style={[styles.arrowContainer, direction === 'left' ? styles.leftArrow : styles.rightArrow]} onPress={onPress}>
-      <MaterialIcons name={direction === 'left' ? 'chevron-left' : 'chevron-right'} size={24} color="black" />
+      <MaterialCommunityIcons name={direction === 'left' ? 'chevron-left' : 'chevron-right'} size={50} color="black" />
     </TouchableOpacity>
   );
 
@@ -43,7 +44,7 @@ const CarouselTwo: React.FC = () => {
         layout={'default'}
         data={data}
         renderItem={renderItem}
-        sliderWidth={viewportWidth * 0.85}
+        sliderWidth={viewportWidth * 0.9}
         itemWidth={viewportWidth * 0.3} // Adjusted to show 3 cards at a time
         loop={true}
         activeSlideAlignment="center" // Center mode
@@ -59,6 +60,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    position: 'relative', // Ensure the arrows are positioned relative to this container
   },
   item: {
     width: viewportWidth * 0.3, // Adjusted to show 3 cards at a time
@@ -82,14 +84,15 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   leftArrow: {
-    left: 10,
+    left: 10, // Adjusted to be more visible on a tablet
+    color: "black",
   },
   rightArrow: {
-    right: 10,
+    right: 10, // Adjusted to be more visible on a tablet
   },
 });
 
-export default CarouselTwo;
+export default Activities;
 
 
 

@@ -29,6 +29,7 @@ const data: Item[] = [
   { title: "LIGHTS", icon: "lightbulb" },
 ];
 
+
 const MyCarousel: React.FC = () => {
   const [showVideoCall, setShowVideoCall] = useState(false);
 
@@ -85,8 +86,8 @@ const MyCarousel: React.FC = () => {
         layout={"default"}
         data={data}
         renderItem={renderItem}
-        sliderWidth={viewportWidth}
-        itemWidth={viewportWidth * 0.2} // Adjusted to show 5 cards at a time
+        sliderWidth={viewportWidth * 0.85} 
+        itemWidth={viewportWidth * 0.17} // Adjusted to show 5 cards at a time
         loop={true}
         activeSlideAlignment="center" // Center mode
         renderArrow={renderArrow}
@@ -104,16 +105,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   item: {
-    width: viewportWidth * 0.2, // Adjusted to show 5 cards at a time
+    width: viewportWidth * 0.18, // Adjusted to show 5 cards at a time
     height: viewportHeight * 0.3,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
-    flexDirection: "row",
+    flexDirection: "column",
     paddingHorizontal: 10,
+
   },
   title: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
     marginLeft: 10,
     color: "white",
