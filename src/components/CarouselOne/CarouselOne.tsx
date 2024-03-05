@@ -69,7 +69,6 @@ const MyCarousel: React.FC = () => {
         renderItem={renderItem}
         sliderWidth={viewportWidth * 0.85} 
         itemWidth={viewportWidth * 0.17} // Adjusted to show 5 cards at a time
-    
         loop={true}
         activeSlideAlignment="center" // Center mode
         renderArrow={renderArrow}
