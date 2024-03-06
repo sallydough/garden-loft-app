@@ -1,41 +1,44 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
-// import axios from 'axios';
+import axios from 'axios';
 import Carousel from 'react-native-snap-carousel';
 import { FontAwesome } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
 
 const Activities = () => {
+  const navigation = useNavigation();
+  const scrollViewRef = useRef<Carousel<any>>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
 
-  useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const response = await axios.get(
-          'https://api.signupgenius.com/v2/k/signups/report/filled/47293846/?user_key=UmNrVWhyYWwrVGhtQmdXeVpweTBZZz09'
-        );
-        if (!response.data.success) {
-          throw new Error('Failed to retrieve signed-up activities.');
-        }
-        setEvents(response.data.data.signup);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching signed-up activities:', error.message);
-        setError(
-          'Failed to retrieve signed-up activities. Please try again later.'
-        );
-        setLoading(false);
+  async function fetchData() {
+    try {
+      const response = await axios.get(
+        'https://api.signupgenius.com/v2/k/signups/report/filled/47293846/?user_key=UmNrVWhyYWwrVGhtQmdXeVpweTBZZz09'
+      );
+      if (!response.data.success) {
+        throw new Error('Failed to retrieve signed-up activities.');
       }
-    };
+      setEvents(response.data.data.signup);
+      setLoading(false);
 
-    fetchEvents();
+      // Navigate to Zoom when data is fetched
+      const eventToNavigate = response.data.data.signup[0]; // Assuming you want to navigate to the first event
+      navigateToZoomLink(eventToNavigate);
+    } catch (error) {
+      console.error('Error fetching signed-up activities:', error.message);
+      setError('Failed to retrieve signed-up activities. Please try again later.');
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
   }, []);
-
-  const scrollViewRef = useRef<Carousel<any>>(null);
 
   const scrollToNext = () => {
     if (scrollViewRef.current) {
@@ -44,7 +47,7 @@ const Activities = () => {
       scrollViewRef.current.snapToItem(nextIndex, true, true);
     }
   };
-  
+
   const scrollToPrevious = () => {
     if (scrollViewRef.current) {
       const currentIndex = scrollViewRef.current.currentIndex || 0;
@@ -55,7 +58,7 @@ const Activities = () => {
 
   const navigateToZoomLink = (event) => {
     setSelectedEvent(event);
-    // Handle navigation to Zoom link
+    navigation.navigate('ZoomScreen', { zoomLink: event.zoomLink });
   };
 
   const renderItem = ({ item }) => (
