@@ -8,11 +8,11 @@ const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window'
 
 const Activities2: React.FC = () => {
   const [contacts, setContacts] = useState([
-    { id: 1, name: 'Picture 1', phoneNumber: '1234567890' },
-    { id: 2, name: 'Picture 2', phoneNumber: '0987654321' },
-    { id: 3, name: 'Picture 3', phoneNumber: '9876543210' },
-    { id: 4, name: 'Picture 4', phoneNumber: '0123456789' },
-    { id: 5, name: 'Picture 5', phoneNumber: '6789012345' },
+    { id: 1, name: 'ROM Seated Exercise', phoneNumber: '1234567890' },
+    { id: 2, name: 'Zumba', phoneNumber: '0987654321' },
+    { id: 3, name: 'Pictionary', phoneNumber: '9876543210' },
+    { id: 4, name: 'Scattegories', phoneNumber: '0123456789' },
+    { id: 5, name: 'Art History', phoneNumber: '6789012345' },
   ]);
 
   const scrollViewRef = useRef<ScrollView>(null);
@@ -44,7 +44,7 @@ const Activities2: React.FC = () => {
       key={item.id}
       style={styles.cardContainer}
       onPress={() => handleCall(item.phoneNumber)}>
-      <MaterialCommunityIcons name="camera-burst" size={94} color="white" />
+      {/* <MaterialCommunityIcons name="camera-burst" size={94} color="white" /> */}
       <Text style={styles.cardText}>{item.name}</Text>
     </TouchableOpacity>
   );
@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
     fontSize: 36,
     color: '#393939',
     fontWeight: '700',
+    textAlign: 'center'
   },
   arrowLeft: {
     position: 'absolute',

@@ -17,6 +17,7 @@ import Lights from "../CarouselTwo/Lights";
 import Entertainment from "../CarouselTwo/Entertainment";
 import Gallery from "../CarouselTwo/Gallery";
 import GLCommunity from "../CarouselTwo/GLCommunity";
+import Activities2 from "../CarouselTwo/Activities2";
 
 
 const { width: viewportWidth, height: viewportHeight } =
@@ -30,7 +31,7 @@ interface Item {
 }
 
 const data: Item[] = [
-  { title: "ACTIVITIES", icon: "weight-lifter", component: <Activities /> },
+  { title: "ACTIVITIES", icon: "weight-lifter", component: <Activities2 /> },
   { title: "VIDEO CALL", icon: "phone", component: <VideoCall />  },
   { title: "GARDEN LOFT", icon: "home-group-plus", component: <GLCommunity />  },
   { title: "ENTERTAINMENT", icon: "movie-open-star", component: <Entertainment/>  },
