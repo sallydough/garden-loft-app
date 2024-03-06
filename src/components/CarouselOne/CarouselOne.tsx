@@ -45,10 +45,10 @@ const MyCarousel: React.FC = () => {
       <View
         style={[
           styles.item,
-          { backgroundColor: index === 3 ? "#f3b718" : "grey" },
+          { backgroundColor: index === 3 ? "#f3b718" : "#909090" },
         ]}
       >
-        <MaterialCommunityIcons name={item.icon} size={72} color="white" />
+        <MaterialCommunityIcons name={item.icon} size={82} color="#f3b718" />
         <Text style={styles.title}>{item.title}</Text>
       </View>
     </TouchableOpacity>
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 60,
     flexDirection: "column",
-    gap: 10,
+    gap: 30,
     paddingHorizontal: 10,
 
   },
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     marginLeft: 10,
-    color: "white",
+    color: "#f3b718",
   },
   arrowLeft: {
     position: 'absolute',
