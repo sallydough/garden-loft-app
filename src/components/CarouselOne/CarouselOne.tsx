@@ -36,10 +36,12 @@ const MyCarousel: React.FC = () => {
 
   const renderItem: ({
     item,
-    index,
+    index, 
+    isActive
   }: {
     item: Item;
     index: number;
+    isActive: boolean
   }) => JSX.Element = ({ item, index }) => (
     <TouchableOpacity onPress={() => handleCardPress(item.title)}>
       <View
