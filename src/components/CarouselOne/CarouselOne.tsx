@@ -178,8 +178,9 @@ import Carousel from "react-native-snap-carousel";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
-import VideoCall from "../VideoCall/VideoCall";
+import VideoCall from "../CarouselTwo/VideoCall";
 import Activities from "../CarouselTwo/Activities";
+import Lights from "../CarouselTwo/Lights";
 
 
 const { width: viewportWidth, height: viewportHeight } =
@@ -195,10 +196,10 @@ interface Item {
 const data: Item[] = [
   { title: "ACTIVITIES", icon: "weight-lifter", component: <Activities /> },
   { title: "VIDEO CALL", icon: "phone", component: <VideoCall />  },
-  { title: "GARDEN LOFT", icon: "home-group-plus" },
-  { title: "ENTERTAINMENT", icon: "movie-open-star" },
-  { title: "GALLERY", icon: "camera-burst" },
-  { title: "LIGHTS", icon: "lightbulb" },
+  { title: "GARDEN LOFT", icon: "home-group-plus", component: <VideoCall />  },
+  { title: "ENTERTAINMENT", icon: "movie-open-star", component: <VideoCall />  },
+  { title: "GALLERY", icon: "camera-burst", component: <VideoCall />  },
+  { title: "LIGHTS", icon: "lightbulb", component: <Lights />  },
 
 ];
 
