@@ -58,12 +58,19 @@ const Home: React.FC = () => {
         style={[
           styles.item,
           {
-            backgroundColor: index === activeIndex ? "#f3b718" : "#909090",
+            backgroundColor: index === activeIndex  + 3 ? "#f3b718" : "#909090",
           },
         ]}
       >
-        <MaterialCommunityIcons name={item.icon} size={82} color="#f3b718" />
-        <Text style={styles.title}>{item.title}</Text>
+        <MaterialCommunityIcons style={[styles.icon, 
+          {
+            color: index === activeIndex  + 3 ? "black" : "#f3b718",
+          }]}  name={item.icon} size={82} color="#f3b718" />
+        
+        <Text style={[styles.title, 
+          {
+            color: index === activeIndex  + 3 ? "black" : "#f3b718",
+          }]}>{item.title}</Text>
       </View>
       {/* <Text>{item.page}</Text> */}
      
@@ -146,6 +153,9 @@ const styles = StyleSheet.create({
   cardPage: {
     flexDirection: 'column',
     gap: 80,
+  },
+  icon: {
+    
   }
 });
 
