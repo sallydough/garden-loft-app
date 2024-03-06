@@ -114,10 +114,10 @@ const MyCarousel: React.FC = () => {
         inactiveSlideOpacity={1} // Opacity of inactive slides
       />
            <TouchableOpacity style={styles.arrowLeft} onPress={scrollToPrevious}>
-        <FontAwesome name="angle-left" size={74} color="black" />
+        <FontAwesome name="angle-left" size={100} color="rgb(45, 62, 95)" />
       </TouchableOpacity>
       <TouchableOpacity style={styles.arrowRight} onPress={scrollToNext}>
-        <FontAwesome name="angle-right" size={74} color="black" />
+        <FontAwesome name="angle-right" size={100} color="rgb(45, 62, 95)" />
       </TouchableOpacity>
       {showVideoCall && <VideoCall />}
     </View>
@@ -149,13 +149,13 @@ const styles = StyleSheet.create({
   },
   arrowLeft: {
     position: 'absolute',
-    top: '15%',
+    top: '12%',
     left: 0,
     transform: [{ translateY: -10 }],
   },
   arrowRight: {
     position: 'absolute',
-    top: '15%',
+    top: '12%',
     right: -10,
     transform: [{ translateY: -10 }],
   },
