@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
-import axios from 'axios';
+// import axios from 'axios';
 import Carousel from 'react-native-snap-carousel';
 import { FontAwesome } from '@expo/vector-icons';
 

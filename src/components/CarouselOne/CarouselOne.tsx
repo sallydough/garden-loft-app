@@ -175,10 +175,12 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Carousel from "react-native-snap-carousel";
+
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import VideoCall from "../VideoCall/VideoCall";
 import Activities from "../CarouselTwo/Activities";
+
 
 const { width: viewportWidth, height: viewportHeight } =
   Dimensions.get("window");
@@ -186,6 +188,7 @@ const { width: viewportWidth, height: viewportHeight } =
 interface Item {
   title: string;
   icon: string;
+
   component?: JSX.Element;
 }
 
@@ -196,6 +199,7 @@ const data: Item[] = [
   { title: "ENTERTAINMENT", icon: "movie-open-star" },
   { title: "GALLERY", icon: "camera-burst" },
   { title: "LIGHTS", icon: "lightbulb" },
+
 ];
 
 const Home: React.FC = () => {
@@ -204,12 +208,14 @@ const Home: React.FC = () => {
 
   const scrollViewRef = useRef<Carousel<Item>>(null);
 
+
   const handleSnapToItem = (index: number) => {
     setActiveIndex(index);
   };
 
   const renderItem = ({ item, index }: { item: Item; index: number }) => (
     <TouchableOpacity onPress={() => handleCardPress(item, index)}>
+
       <View
         style={[
           styles.item,
@@ -221,6 +227,8 @@ const Home: React.FC = () => {
         <MaterialCommunityIcons name={item.icon} size={82} color="#f3b718" />
         <Text style={styles.title}>{item.title}</Text>
       </View>
+      {/* <Text>{item.page}</Text> */}
+     
     </TouchableOpacity>
   );
 
@@ -256,6 +264,7 @@ const Home: React.FC = () => {
         <FontAwesome name="angle-right" size={100} color="rgb(45, 62, 95)" />
       </TouchableOpacity>
       {showVideoCall && <VideoCall />}
+    
     </View>
   );
 };
@@ -294,6 +303,11 @@ const styles = StyleSheet.create({
     right: -10,
     transform: [{ translateY: -10 }],
   },
+  cardPage: {
+    flexDirection: 'column',
+    gap: 80,
+  }
 });
 
 export default Home;
+
