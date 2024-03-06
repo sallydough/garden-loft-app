@@ -86,9 +86,10 @@ const Home: React.FC = () => {
         layout={"default"}
         data={data}
         renderItem={renderItem}
-        sliderWidth={viewportWidth * 0.85}
-        itemWidth={viewportWidth * 0.17}
+        sliderWidth={Math.round(viewportWidth * 0.85)}
+        itemWidth={Math.round(viewportWidth * 0.17)}
         loop={true}
+        useScrollView={true}
         activeSlideAlignment="center"
         ref={scrollViewRef}
         inactiveSlideScale={0.8} // Scale of inactive slides
