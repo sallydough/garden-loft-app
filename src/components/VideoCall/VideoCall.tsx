@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Linking, Dimensions } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'; // Import FontAwesome icons
 import Carousel from 'react-native-snap-carousel';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
 
@@ -43,7 +44,7 @@ const VideoCallCarousel: React.FC = () => {
       key={item.id}
       style={styles.cardContainer}
       onPress={() => handleCall(item.phoneNumber)}>
-      <FontAwesome name="video-camera" size={74} color="white" />
+      <MaterialCommunityIcons name="emoticon" size={94} color="white" />
       <Text style={styles.cardText}>{item.name}</Text>
     </TouchableOpacity>
   );
@@ -87,6 +88,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginHorizontal: 5,
+    flexDirection: 'column',
+    gap: 25,
   },
   cardText: {
     fontSize: 36,

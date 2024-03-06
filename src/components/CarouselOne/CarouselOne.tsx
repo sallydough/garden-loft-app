@@ -7,10 +7,10 @@ import {
   TouchableOpacity, Linking,
 } from "react-native";
 import Carousel from "react-native-snap-carousel";
-import { MaterialIcons } from "@expo/vector-icons"; // Assuming you're using Expo for icons
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons'; // Import FontAwesome icons
 import VideoCall from "../VideoCall/VideoCall";
+import HelpButton from "../HelpButton/CarouselTwo";
 
 
 const { width: viewportWidth, height: viewportHeight } =
@@ -19,15 +19,16 @@ const { width: viewportWidth, height: viewportHeight } =
 interface Item {
   title: string;
   icon: string;
+  page: any;
 }
 
 const data: Item[] = [
-  { title: "ACTIVITIES", icon: "weight-lifter" },
-  { title: "VIDEO CALL", icon: "phone" },
-  { title: "GARDEN LOFT", icon: "home-group-plus" },
-  { title: "ENTERTAINMENT", icon: "movie-open-star" },
-  { title: "GALLERY", icon: "camera-burst" },
-  { title: "LIGHTS", icon: "lightbulb" },
+  { title: "ACTIVITIES", icon: "weight-lifter", page: <VideoCall/> },
+  { title: "VIDEO CALL", icon: "phone", page: <HelpButton/> },
+  { title: "GARDEN LOFT", icon: "home-group-plus", page: <HelpButton/> },
+  { title: "ENTERTAINMENT", icon: "movie-open-star", page: <HelpButton/> },
+  { title: "GALLERY", icon: "camera-burst", page: <HelpButton/> },
+  { title: "LIGHTS", icon: "lightbulb", page: <HelpButton/> },
 ];
 
 
@@ -43,7 +44,7 @@ const MyCarousel: React.FC = () => {
     index: number;
     isActive: boolean
   }) => JSX.Element = ({ item, index }) => (
-    <TouchableOpacity onPress={() => handleCardPress(item.title)}>
+    <TouchableOpacity style={styles.cardPage} onPress={() => handleCardPress(item.title)}>
       <View
         style={[
           styles.item,
@@ -53,6 +54,8 @@ const MyCarousel: React.FC = () => {
         <MaterialCommunityIcons name={item.icon} size={82} color="#f3b718" />
         <Text style={styles.title}>{item.title}</Text>
       </View>
+      {/* <Text>{item.page}</Text> */}
+     
     </TouchableOpacity>
   );
 
@@ -122,6 +125,7 @@ const MyCarousel: React.FC = () => {
         <FontAwesome name="angle-right" size={100} color="rgb(45, 62, 95)" />
       </TouchableOpacity>
       {showVideoCall && <VideoCall />}
+    
     </View>
   );
 };
@@ -161,6 +165,12 @@ const styles = StyleSheet.create({
     right: -10,
     transform: [{ translateY: -10 }],
   },
+  cardPage: {
+    flexDirection: 'column',
+    gap: 80,
+  }
 });
 
 export default MyCarousel;
+
+

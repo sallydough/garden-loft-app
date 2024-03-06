@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
-import axios from 'axios';
+// import axios from 'axios';
 import Carousel, { CarouselStatic } from 'react-native-snap-carousel';
 
 // Define the type for each event item
