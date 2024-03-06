@@ -45,10 +45,10 @@ const MyCarousel: React.FC = () => {
       <View
         style={[
           styles.item,
-          { backgroundColor: index === 3 ? "#f3b718" : "grey" },
+          { backgroundColor: index === 3 ? "#f3b718" : "#909090" },
         ]}
       >
-        <MaterialCommunityIcons name={item.icon} size={72} color="white" />
+        <MaterialCommunityIcons name={item.icon} size={82} color="#f3b718" />
         <Text style={styles.title}>{item.title}</Text>
       </View>
     </TouchableOpacity>
@@ -114,10 +114,10 @@ const MyCarousel: React.FC = () => {
         inactiveSlideOpacity={1} // Opacity of inactive slides
       />
            <TouchableOpacity style={styles.arrowLeft} onPress={scrollToPrevious}>
-        <FontAwesome name="angle-left" size={74} color="black" />
+        <FontAwesome name="angle-left" size={100} color="rgb(45, 62, 95)" />
       </TouchableOpacity>
       <TouchableOpacity style={styles.arrowRight} onPress={scrollToNext}>
-        <FontAwesome name="angle-right" size={74} color="black" />
+        <FontAwesome name="angle-right" size={100} color="rgb(45, 62, 95)" />
       </TouchableOpacity>
       {showVideoCall && <VideoCall />}
     </View>
@@ -135,8 +135,9 @@ const styles = StyleSheet.create({
     height: viewportHeight * 0.25,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 10,
+    borderRadius: 60,
     flexDirection: "column",
+    gap: 30,
     paddingHorizontal: 10,
 
   },
@@ -144,17 +145,17 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     marginLeft: 10,
-    color: "white",
+    color: "#f3b718",
   },
   arrowLeft: {
     position: 'absolute',
-    top: '15%',
+    top: '12%',
     left: 0,
     transform: [{ translateY: -10 }],
   },
   arrowRight: {
     position: 'absolute',
-    top: '15%',
+    top: '12%',
     right: -10,
     transform: [{ translateY: -10 }],
   },

@@ -43,7 +43,7 @@ const VideoCallCarousel: React.FC = () => {
       key={item.id}
       style={styles.cardContainer}
       onPress={() => handleCall(item.phoneNumber)}>
-      <FontAwesome name="video-camera" size={44} color="white" />
+      <FontAwesome name="video-camera" size={74} color="white" />
       <Text style={styles.cardText}>{item.name}</Text>
     </TouchableOpacity>
   );
@@ -64,10 +64,10 @@ const VideoCallCarousel: React.FC = () => {
       />
 
       <TouchableOpacity style={styles.arrowLeft} onPress={scrollToPrevious}>
-        <FontAwesome name="angle-left" size={74} color="black" />
+        <FontAwesome name="angle-left" size={124} color="rgb(45, 62, 95)" />
       </TouchableOpacity>
       <TouchableOpacity style={styles.arrowRight} onPress={scrollToNext}>
-        <FontAwesome name="angle-right" size={74} color="black" />
+        <FontAwesome name="angle-right" size={124} color="rgb(45, 62, 95)" />
       </TouchableOpacity>
     </View>
   );
@@ -83,25 +83,26 @@ const styles = StyleSheet.create({
     width: viewportWidth * 0.3, // Adjusted to show 3 cards at a time
     height: viewportHeight * 0.3,
     backgroundColor: '#f09030',
-    borderRadius: 10,
+    borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',
     marginHorizontal: 5,
   },
   cardText: {
-    fontSize: 16,
-    color: 'white',
+    fontSize: 36,
+    color: '#393939',
+    fontWeight: '700',
   },
   arrowLeft: {
     position: 'absolute',
-    top: '50%',
-    left: 0,
+    top: '40%',
+    left: -17,
     transform: [{ translateY: -50 }],
   },
   arrowRight: {
     position: 'absolute',
-    top: '50%',
-    right: -10,
+    top: '40%',
+    right: -25,
     transform: [{ translateY: -50 }],
   },
 });

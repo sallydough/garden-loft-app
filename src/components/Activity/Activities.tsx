@@ -1,21 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import axios from 'axios';
-import Carousel, { CarouselStatic } from 'react-native-snap-carousel';
+import Carousel from 'react-native-snap-carousel';
+import { FontAwesome } from '@expo/vector-icons';
 
-// Define the type for each event item
-interface EventItem {
-  item: string;
-  // Add more properties as needed
-}
+const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
 
-const { width: viewportWidth } = Dimensions.get('window');
-
-const Activities: React.FC = () => {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  const [events, setEvents] = useState<EventItem[]>([]);
-  const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
+const Activities = () => {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [events, setEvents] = useState([]);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -40,7 +35,7 @@ const Activities: React.FC = () => {
     fetchEvents();
   }, []);
 
-  const scrollViewRef = useRef<CarouselStatic<EventItem> | null>(null);
+  const scrollViewRef = useRef<Carousel<any>>(null);
 
   const scrollToNext = () => {
     if (scrollViewRef.current) {
@@ -49,7 +44,7 @@ const Activities: React.FC = () => {
       scrollViewRef.current.snapToItem(nextIndex, true, true);
     }
   };
-
+  
   const scrollToPrevious = () => {
     if (scrollViewRef.current) {
       const currentIndex = scrollViewRef.current.currentIndex || 0;
@@ -58,12 +53,12 @@ const Activities: React.FC = () => {
     }
   };
 
-  const navigateToZoomLink = (event: EventItem) => {
+  const navigateToZoomLink = (event) => {
     setSelectedEvent(event);
     // Handle navigation to Zoom link
   };
 
-  const renderItem = ({ item }: { item: EventItem }) => (
+  const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => navigateToZoomLink(item)} style={styles.card}>
       <Text>{item.item}</Text>
       {/* Display other properties if needed */}
@@ -93,10 +88,10 @@ const Activities: React.FC = () => {
       />
 
       <TouchableOpacity style={styles.arrowLeft} onPress={scrollToPrevious}>
-        <Text>{'<'}</Text>
+        <FontAwesome name="angle-left" size={24} color="black" />
       </TouchableOpacity>
       <TouchableOpacity style={styles.arrowRight} onPress={scrollToNext}>
-        <Text>{'>'}</Text>
+        <FontAwesome name="angle-right" size={24} color="black" />
       </TouchableOpacity>
     </View>
   );
