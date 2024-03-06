@@ -14,6 +14,9 @@ import { FontAwesome } from "@expo/vector-icons";
 import VideoCall from "../CarouselTwo/VideoCall";
 import Activities from "../CarouselTwo/Activities";
 import Lights from "../CarouselTwo/Lights";
+import Entertainment from "../CarouselTwo/Entertainment";
+import Gallery from "../CarouselTwo/Gallery";
+import GLCommunity from "../CarouselTwo/GLCommunity";
 
 
 const { width: viewportWidth, height: viewportHeight } =
@@ -29,9 +32,9 @@ interface Item {
 const data: Item[] = [
   { title: "ACTIVITIES", icon: "weight-lifter", component: <Activities /> },
   { title: "VIDEO CALL", icon: "phone", component: <VideoCall />  },
-  { title: "GARDEN LOFT", icon: "home-group-plus", component: <VideoCall />  },
-  { title: "ENTERTAINMENT", icon: "movie-open-star", component: <VideoCall />  },
-  { title: "GALLERY", icon: "camera-burst", component: <VideoCall />  },
+  { title: "GARDEN LOFT", icon: "home-group-plus", component: <GLCommunity />  },
+  { title: "ENTERTAINMENT", icon: "movie-open-star", component: <Entertainment/>  },
+  { title: "GALLERY", icon: "camera-burst", component: <Gallery />  },
   { title: "LIGHTS", icon: "lightbulb", component: <Lights />  },
 
 ];

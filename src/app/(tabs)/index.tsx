@@ -1,7 +1,7 @@
 import { StyleSheet , Text, View } from 'react-native';
 
 import CarouselOne from '@/src/components/CarouselOne/CarouselOne';
-import HelpButton from '@/src/components/HelpButton/CarouselTwo';
+import HelpButton from '@/src/components/HelpButton/HelpButton';
 import Activities from '@/src/components/CarouselTwo/Activities';
 
 
