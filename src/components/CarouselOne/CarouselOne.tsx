@@ -62,7 +62,7 @@ const MyCarousel: React.FC = () => {
     }
   };
 
-  // const renderArrow = (
+  // const renderArrow= (
   //   direction: "left" | "right",
   //   onPress: () => void
   // ) => (
