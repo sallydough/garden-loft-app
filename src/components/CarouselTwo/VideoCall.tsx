@@ -24,7 +24,7 @@ const VideoCallCarousel: React.FC = () => {
       scrollViewRef.current.snapToItem(nextIndex, true, true);
     }
   };
-  
+
   const scrollToPrevious = () => {
     if (scrollViewRef.current) {
       const currentIndex = scrollViewRef.current.currentIndex || 0;
@@ -32,7 +32,6 @@ const VideoCallCarousel: React.FC = () => {
       scrollViewRef.current.snapToItem(prevIndex, true, true);
     }
   };
-  
 
   const handleCall = (phoneNumber: string) => {
     const url = `tel:${phoneNumber}`;

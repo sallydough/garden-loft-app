@@ -1,11 +1,12 @@
-import { StyleSheet , Text, View } from 'react-native';
+import { View, Text } from 'react-native'
+import React from 'react'
 
-
-
-export default function HelpButton() {
+const HelpButton = () => {
   return (
-    <View >
-      <Text>Help Button</Text>
+    <View>
+      <Text>HelpButton</Text>
     </View>
-  );
+  )
 }
+
+export default HelpButton

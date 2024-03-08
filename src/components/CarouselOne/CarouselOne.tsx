@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     
   },prompt: {
     fontSize: 30,
-    marginBottom: 40,
+    marginBottom: 25,
   },
   item: {
     width: viewportWidth * 0.17,
@@ -214,3 +214,5 @@ const styles = StyleSheet.create({
 });
 
 export default Home;
+
+
