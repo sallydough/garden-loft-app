@@ -18,7 +18,6 @@ import Entertainment from "../CarouselTwo/Entertainment";
 import Gallery from "../CarouselTwo/Gallery";
 import GLCommunity from "../CarouselTwo/GLCommunity";
 import Activities2 from "../CarouselTwo/Activities2";
-import Test1 from "../CarouselTwo/Test1";
 
 const { width: viewportWidth, height: viewportHeight } =
   Dimensions.get("window");
@@ -46,7 +45,7 @@ const data: Item[] = [
   {
     title: "GARDEN LOFT",
     icon: "home-group-plus",
-    component: <Test1 />,
+    component: <GLCommunity />,
     prompt: "Meet Garden Loft Members?",
   },
   {
