@@ -18,7 +18,7 @@ import Entertainment from "../CarouselTwo/Entertainment";
 import Gallery from "../CarouselTwo/Gallery";
 import GLCommunity from "../CarouselTwo/GLCommunity";
 import Activities2 from "../CarouselTwo/Activities2";
-
+import Test1 from "../CarouselTwo/Test1";
 
 const { width: viewportWidth, height: viewportHeight } =
   Dimensions.get("window");
@@ -26,18 +26,47 @@ const { width: viewportWidth, height: viewportHeight } =
 interface Item {
   title: string;
   icon: string;
-
   component?: JSX.Element;
+  prompt: string;
 }
 
 const data: Item[] = [
-  { title: "ACTIVITIES", icon: "weight-lifter", component: <Activities2 /> },
-  { title: "VIDEO CALL", icon: "phone", component: <VideoCall />  },
-  { title: "GARDEN LOFT", icon: "home-group-plus", component: <GLCommunity />  },
-  { title: "ENTERTAINMENT", icon: "movie-open-star", component: <Entertainment/>  },
-  { title: "GALLERY", icon: "camera-burst", component: <Gallery />  },
-  { title: "LIGHTS", icon: "lightbulb", component: <Lights />  },
-
+  {
+    title: "ACTIVITIES",
+    icon: "weight-lifter",
+    component: <Activities2 />,
+    prompt: "Join an Activity?",
+  },
+  {
+    title: "VIDEO CALL",
+    icon: "phone",
+    component: <VideoCall />,
+    prompt: "Make a Video Call?",
+  },
+  {
+    title: "GARDEN LOFT",
+    icon: "home-group-plus",
+    component: <Test1 />,
+    prompt: "Meet Garden Loft Members?",
+  },
+  {
+    title: "ENTERTAINMENT",
+    icon: "movie-open-star",
+    component: <Entertainment />,
+    prompt: "Watch Entertainment?",
+  },
+  {
+    title: "GALLERY",
+    icon: "camera-burst",
+    component: <Gallery />,
+    prompt: "View Gallery?",
+  },
+  {
+    title: "LIGHTS",
+    icon: "lightbulb",
+    component: <Lights />,
+    prompt: "Change Lights?",
+  },
 ];
 
 const Home: React.FC = () => {
@@ -46,50 +75,61 @@ const Home: React.FC = () => {
 
   const scrollViewRef = useRef<Carousel<Item>>(null);
 
-
   const handleSnapToItem = (index: number) => {
     setActiveIndex(index);
   };
 
   const renderItem = ({ item, index }: { item: Item; index: number }) => (
     <TouchableOpacity onPress={() => handleCardPress(item, index)}>
-
       <View
         style={[
           styles.item,
           {
-            backgroundColor: index === activeIndex  + 3 ? "#f3b718" : "#909090",
+            backgroundColor: index === activeIndex + 3 ? "#f3b718" : "#909090",
           },
         ]}
       >
-        <MaterialCommunityIcons style={[styles.icon, 
-          {
-            color: index === activeIndex  + 3 ? "black" : "#f3b718",
-          }]}  name={item.icon} size={82} color="#f3b718" />
-        
-        <Text style={[styles.title, 
-          {
-            color: index === activeIndex  + 3 ? "black" : "#f3b718",
-          }]}>{item.title}</Text>
+        <MaterialCommunityIcons
+          style={[
+            styles.icon,
+            {
+              color: index === activeIndex + 3 ? "black" : "#f3b718",
+            },
+          ]}
+          name={item.icon}
+          size={82}
+          color="#f3b718"
+        />
+
+        <Text
+          style={[
+            styles.title,
+            {
+              color: index === activeIndex + 3 ? "black" : "#f3b718",
+            },
+          ]}
+        >
+          {item.title}
+        </Text>
       </View>
       {/* <Text>{item.page}</Text> */}
-     
     </TouchableOpacity>
   );
 
   const handleCardPress = (item: Item, index: number) => {
     if (item.component) {
       // Render component if available
-      setShowVideoCall(false);
+      
+      // setShowVideoCall(false);
     } else {
-      setShowVideoCall(item.title === "VIDEO CALL");
+      // setShowVideoCall(item.title === "VIDEO CALL");
     }
     scrollViewRef.current?.snapToItem(index);
   };
 
   return (
     <View style={styles.container}>
-      <Carousel
+      <Carousel style={styles.carousel1}
         layout={"default"}
         data={data}
         renderItem={renderItem}
@@ -103,15 +143,24 @@ const Home: React.FC = () => {
         inactiveSlideOpacity={0.5}
         onSnapToItem={(index) => handleSnapToItem(index)} // Handle snapping logic
       />
+      {/* Prompt */}
+      <Text style={styles.prompt}>{data[activeIndex].prompt && data[activeIndex].prompt}</Text>
+      {/* Bottom component */}
       {data[activeIndex].component && data[activeIndex].component}
-      <TouchableOpacity style={styles.arrowLeft} onPress={() => scrollViewRef.current?.snapToPrev()}>
+
+      <TouchableOpacity
+        style={styles.arrowLeft}
+        onPress={() => scrollViewRef.current?.snapToPrev()}
+      >
         <FontAwesome name="angle-left" size={100} color="rgb(45, 62, 95)" />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.arrowRight} onPress={() => scrollViewRef.current?.snapToNext()}>
+      <TouchableOpacity
+        style={styles.arrowRight}
+        onPress={() => scrollViewRef.current?.snapToNext()}
+      >
         <FontAwesome name="angle-right" size={100} color="rgb(45, 62, 95)" />
       </TouchableOpacity>
-      {showVideoCall && <VideoCall />}
-    
+      {/* {showVideoCall && <VideoCall />} */}
     </View>
   );
 };
@@ -121,6 +170,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     marginTop: 70,
+    flexDirection: "column",
+    gap: 0,
+  },carousel1: {
+    
+  },prompt: {
+    fontSize: 30,
+    marginBottom: 40,
   },
   item: {
     width: viewportWidth * 0.17,
@@ -151,13 +207,10 @@ const styles = StyleSheet.create({
     transform: [{ translateY: -10 }],
   },
   cardPage: {
-    flexDirection: 'column',
+    flexDirection: "column",
     gap: 80,
   },
-  icon: {
-    
-  }
+  icon: {},
 });
 
 export default Home;
-
