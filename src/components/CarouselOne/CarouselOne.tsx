@@ -18,7 +18,6 @@ import Entertainment from "../CarouselTwo/Entertainment";
 import Gallery from "../CarouselTwo/Gallery";
 import GLCommunity from "../CarouselTwo/GLCommunity";
 import Activities2 from "../CarouselTwo/Activities2";
-import Test1 from "../CarouselTwo/Test1";
 
 const { width: viewportWidth, height: viewportHeight } =
   Dimensions.get("window");
@@ -46,7 +45,7 @@ const data: Item[] = [
   {
     title: "GARDEN LOFT",
     icon: "home-group-plus",
-    component: <Test1 />,
+    component: <GLCommunity />,
     prompt: "Meet Garden Loft Members?",
   },
   {
@@ -140,13 +139,15 @@ const Home: React.FC = () => {
         activeSlideAlignment="center"
         ref={scrollViewRef}
         inactiveSlideScale={0.8} // Scale of inactive slides
-        inactiveSlideOpacity={0.5}
+        inactiveSlideOpacity={0.7}
         onSnapToItem={(index) => handleSnapToItem(index)} // Handle snapping logic
       />
       {/* Prompt */}
       <Text style={styles.prompt}>{data[activeIndex].prompt && data[activeIndex].prompt}</Text>
+      
       {/* Bottom component */}
-      {data[activeIndex].component && data[activeIndex].component}
+      <Text style={styles.carousel2}>{data[activeIndex].component && data[activeIndex].component}</Text>
+      
 
       <TouchableOpacity
         style={styles.arrowLeft}
@@ -160,7 +161,6 @@ const Home: React.FC = () => {
       >
         <FontAwesome name="angle-right" size={100} color="rgb(45, 62, 95)" />
       </TouchableOpacity>
-      {/* {showVideoCall && <VideoCall />} */}
     </View>
   );
 };
@@ -169,12 +169,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    marginTop: 70,
+    marginTop: 60,
     flexDirection: "column",
-    gap: 0,
+    gap: 5,
   },carousel1: {
     
-  },prompt: {
+  },carousel2: {
+    marginBottom: -40,
+  },
+prompt: {
     fontSize: 30,
     marginBottom: 25,
   },
@@ -187,6 +190,15 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     gap: 30,
     paddingHorizontal: 10,
+
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 8,
+      height: 7,
+    },
+    shadowOpacity:  0.22,
+    shadowRadius: 9.22,
+    elevation: 12,
   },
   title: {
     fontSize: 19,

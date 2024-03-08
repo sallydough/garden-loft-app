@@ -16,33 +16,23 @@ const Gallery: React.FC = () => {
   ]);
 
   const scrollViewRef = useRef<ScrollView>(null);
-
-  const scrollToNext = () => {
-    if (scrollViewRef.current) {
-      const currentIndex = scrollViewRef.current.currentIndex || 0;
-      const nextIndex = currentIndex + 1;
-      scrollViewRef.current.snapToItem(nextIndex, true, true);
-    }
-  };
+  const [activeIndex, setActiveIndex] = useState(0);
   
-  const scrollToPrevious = () => {
-    if (scrollViewRef.current) {
-      const currentIndex = scrollViewRef.current.currentIndex || 0;
-      const prevIndex = currentIndex - 1;
-      scrollViewRef.current.snapToItem(prevIndex, true, true);
-    }
-  };
-  
-
   const handleCall = (phoneNumber: string) => {
     const url = `tel:${phoneNumber}`;
     Linking.openURL(url);
   };
 
+  const handleSnapToItem = (index: number) => {
+    setActiveIndex(index);
+  };
+
   const renderItem = ({ item, index }: { item: any; index: number }) => (
     <TouchableOpacity
       key={item.id}
-      style={styles.cardContainer}
+      style={[styles.cardContainer,{
+        backgroundColor: index === activeIndex + 3 ? "#f3b718" : "#f09030",
+      },]}
       onPress={() => handleCall(item.phoneNumber)}>
       <MaterialCommunityIcons name="camera-burst" size={94} color="white" />
       <Text style={styles.cardText}>{item.name}</Text>
@@ -51,23 +41,25 @@ const Gallery: React.FC = () => {
 
   return (
     <View style={styles.container}>
-    <Carousel
-       layout={'default'}
-       data={contacts}
-       renderItem={renderItem}
-       sliderWidth={viewportWidth * 0.90}
-       itemWidth={viewportWidth * 0.3}
-       loop={true}
-       activeSlideAlignment="center"
-       ref={(c) => { scrollViewRef.current = c; }}
-       inactiveSlideScale={0.8}
-       inactiveSlideOpacity={1}
+      <Carousel
+        layout={'default'}
+        data={contacts}
+        renderItem={renderItem}
+        sliderWidth={Math.round(viewportWidth * 0.90)}
+        itemWidth={Math.round(viewportWidth * 0.3)}
+        loop={true}
+        useScrollView={true}
+        activeSlideAlignment="center"
+        ref={scrollViewRef}
+        inactiveSlideScale={0.8}
+        inactiveSlideOpacity={1}
+        onSnapToItem={(index) => handleSnapToItem(index)} // Handle snapping logic
       />
 
-      <TouchableOpacity style={styles.arrowLeft} onPress={scrollToPrevious}>
+      <TouchableOpacity style={styles.arrowLeft} onPress={() => scrollViewRef.current?.snapToPrev()}>
         <FontAwesome name="angle-left" size={124} color="rgb(45, 62, 95)" />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.arrowRight} onPress={scrollToNext}>
+      <TouchableOpacity style={styles.arrowRight} onPress={() => scrollViewRef.current?.snapToNext()}>
         <FontAwesome name="angle-right" size={124} color="rgb(45, 62, 95)" />
       </TouchableOpacity>
     </View>

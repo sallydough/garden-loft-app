@@ -17,31 +17,21 @@ const VideoCallCarousel: React.FC = () => {
 
   const scrollViewRef = useRef<Carousel<any>>(null);
 
-  const scrollToNext = () => {
-    if (scrollViewRef.current) {
-      const currentIndex = scrollViewRef.current.currentIndex || 0;
-      const nextIndex = (currentIndex + 1) % contacts.length;
-      scrollViewRef.current.snapToItem(nextIndex, true, true);
-    }
-  };
-
-  const scrollToPrevious = () => {
-    if (scrollViewRef.current) {
-      const currentIndex = scrollViewRef.current.currentIndex || 0;
-      const prevIndex = (currentIndex === 0 ? contacts.length - 1 : currentIndex - 1) % contacts.length;
-      scrollViewRef.current.snapToItem(prevIndex, true, true);
-    }
-  };
-
   const handleCall = (phoneNumber: string) => {
     const url = `tel:${phoneNumber}`;
     Linking.openURL(url);
   };
 
+  const handleSnapToItem = (index: number) => {
+    setActiveIndex(index);
+  };
+
   const renderItem = ({ item, index }: { item: any; index: number }) => (
     <TouchableOpacity
       key={item.id}
-      style={styles.cardContainer}
+      style={[styles.cardContainer,{
+        backgroundColor: index === activeIndex + 3 ? "#f3b718" : "#f09030",
+      },]}
       onPress={() => handleCall(item.phoneNumber)}>
       <MaterialCommunityIcons name="emoticon" size={94} color="white" />
       <Text style={styles.cardText}>{item.name}</Text>
@@ -62,6 +52,7 @@ const VideoCallCarousel: React.FC = () => {
         ref={scrollViewRef}
         inactiveSlideScale={0.8}
         inactiveSlideOpacity={1}
+        onSnapToItem={(index) => handleSnapToItem(index)} // Handle snapping logic
       />
 
       <TouchableOpacity style={styles.arrowLeft} onPress={() => scrollViewRef.current?.snapToPrev()}>
@@ -98,13 +89,17 @@ const styles = StyleSheet.create({
   },
   arrowLeft: {
     position: 'absolute',
-    top: '40%',
+    paddingTop: 20,
+    paddingBottom: 20,
+    top: '30%',
     left: -17,
     transform: [{ translateY: -50 }],
   },
   arrowRight: {
     position: 'absolute',
-    top: '40%',
+    paddingTop: 20,
+    paddingBottom: 20,
+    top: '30%',
     right: -25,
     transform: [{ translateY: -50 }],
   },
