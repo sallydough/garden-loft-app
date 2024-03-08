@@ -145,8 +145,10 @@ const Home: React.FC = () => {
       />
       {/* Prompt */}
       <Text style={styles.prompt}>{data[activeIndex].prompt && data[activeIndex].prompt}</Text>
+      
       {/* Bottom component */}
-      {data[activeIndex].component && data[activeIndex].component}
+      <Text style={styles.carousel2}>{data[activeIndex].component && data[activeIndex].component}</Text>
+      
 
       <TouchableOpacity
         style={styles.arrowLeft}
@@ -160,7 +162,6 @@ const Home: React.FC = () => {
       >
         <FontAwesome name="angle-right" size={100} color="rgb(45, 62, 95)" />
       </TouchableOpacity>
-      {/* {showVideoCall && <VideoCall />} */}
     </View>
   );
 };
@@ -169,14 +170,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    marginTop: 70,
+    marginTop: 60,
     flexDirection: "column",
-    gap: 0,
+    gap: 5,
   },carousel1: {
     
-  },prompt: {
+  },carousel2: {
+    marginBottom: -40,
+  },
+prompt: {
     fontSize: 30,
-    marginBottom: 40,
+    marginBottom: 25,
   },
   item: {
     width: viewportWidth * 0.17,
