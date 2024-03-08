@@ -139,7 +139,7 @@ const Home: React.FC = () => {
         activeSlideAlignment="center"
         ref={scrollViewRef}
         inactiveSlideScale={0.8} // Scale of inactive slides
-        inactiveSlideOpacity={0.5}
+        inactiveSlideOpacity={0.7}
         onSnapToItem={(index) => handleSnapToItem(index)} // Handle snapping logic
       />
       {/* Prompt */}
@@ -190,6 +190,15 @@ prompt: {
     flexDirection: "column",
     gap: 30,
     paddingHorizontal: 10,
+
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 8,
+      height: 7,
+    },
+    shadowOpacity:  0.22,
+    shadowRadius: 9.22,
+    elevation: 12,
   },
   title: {
     fontSize: 19,
