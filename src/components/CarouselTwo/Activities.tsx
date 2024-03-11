@@ -504,6 +504,197 @@ const styles = StyleSheet.create({
 export default Activities;
 
 
+// import React, { useState, useEffect, useRef } from 'react';
+// import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+// import axios from 'axios';
+// import Carousel, { CarouselStatic } from 'react-native-snap-carousel';
+// import moment from 'moment';
+
+// interface EventItem {
+//   item: string;
+//   startDate: Date;
+//   endDate?: Date;
+// }
+
+// const { width: viewportWidth } = Dimensions.get('window');
+
+// const Activities: React.FC = () => {
+//   const [loading, setLoading] = useState<boolean>(true);
+//   const [error, setError] = useState<string | null>(null);
+//   const [events, setEvents] = useState<EventItem[]>([]);
+//   const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
+//   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+//   useEffect(() => {
+//     const fetchEvents = async () => {
+//       try {
+//         const response = await axios.get(
+//           'https://api.signupgenius.com/v2/k/signups/report/filled/47293846/?user_key=UmNrVWhyYWwrVGhtQmdXeVpweTBZZz09'
+//         );
+//         if (!response.data.success) {
+//           throw new Error('Failed to retrieve signed-up activities.');
+//         }
+//         const eventData = response.data.data.signup.map((item: any) => ({
+//           item: item.item,
+//           startDate: moment(item.startdatestring.replace(/-/g, '/'), 'YYYY/MM/DD HH:mm:ss').toDate(),
+//           endDate: item.enddatestring ? moment(item.enddatestring.replace(/-/g, '/'), 'YYYY/MM/DD HH:mm:ss').toDate() : undefined,
+//         }));
+//         setEvents(eventData);
+//         setLoading(false);
+//       } catch (error) {
+//         console.error('Error fetching signed-up activities:', error.message);
+//         setError('Failed to retrieve signed-up activities. Please try again later.');
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchEvents();
+//   }, []);
+
+//   const scrollViewRef = useRef<CarouselStatic<EventItem> | null>(null);
+
+//   const scrollToNext = () => {
+//     if (scrollViewRef.current) {
+//       const currentIndex = scrollViewRef.current.currentIndex || 0;
+//       const nextIndex = currentIndex + 1;
+//       scrollViewRef.current.snapToItem(nextIndex, true, true);
+//     }
+//   };
+
+//   const scrollToPrevious = () => {
+//     if (scrollViewRef.current) {
+//       const currentIndex = scrollViewRef.current.currentIndex || 0;
+//       const prevIndex = currentIndex - 1;
+//       scrollViewRef.current.snapToItem(prevIndex, true, true);
+//     }
+//   };
+
+//   const navigateToZoomLink = (event: EventItem) => {
+//     setSelectedEvent(event);
+//     setIsModalOpen(true);
+//   };
+
+//   const closeModal = () => {
+//     setIsModalOpen(false);
+//     setSelectedEvent(null);
+//   };
+
+//   const renderItem = ({ item }: { item: EventItem }) => (
+//     <TouchableOpacity onPress={() => navigateToZoomLink(item)} style={styles.card}>
+//       <Text>{item.item}</Text>
+//       <Text>Date: {moment(item.startDate).format('MMMM Do YYYY, h:mm:ss a')}</Text>
+//       {item.endDate && (
+//         <Text>End Date: {moment(item.endDate).format('MMMM Do YYYY, h:mm:ss a')}</Text>
+//       )}
+//     </TouchableOpacity>
+//   );
+
+//   return (
+//     <View style={styles.container}>
+//       {loading ? (
+//         <Text>Loading...</Text>
+//       ) : error ? (
+//         <Text>Error: {error}</Text>
+//       ) : (
+//         <>
+//           <Carousel
+//             data={events}
+//             renderItem={renderItem}
+//             sliderWidth={viewportWidth * 0.85}
+//             itemWidth={viewportWidth * 0.3}
+//             loop={true}
+//             activeSlideAlignment="center"
+//             ref={scrollViewRef}
+//             inactiveSlideScale={0.8}
+//             inactiveSlideOpacity={1}
+//           />
+
+//           <TouchableOpacity style={styles.arrowLeft} onPress={scrollToPrevious}>
+//             <Text>{'<'}</Text>
+//           </TouchableOpacity>
+//           <TouchableOpacity style={styles.arrowRight} onPress={scrollToNext}>
+//             <Text>{'>'}</Text>
+//           </TouchableOpacity>
+
+//           {isModalOpen && selectedEvent && (
+//             <View style={styles.modalContainer}>
+//               <View style={styles.modal}>
+//                 <Text>{selectedEvent.item}</Text>
+//                 {selectedEvent.endDate && (
+//                   <Text>End Date: {moment(selectedEvent.endDate).format('MMMM Do YYYY, h:mm:ss a')}</Text>
+//                 )}
+//                 <TouchableOpacity onPress={closeModal} style={styles.closeButton}>
+//                   <Text>Close</Text>
+//                 </TouchableOpacity>
+//               </View>
+//             </View>
+//           )}
+//         </>
+//       )}
+//     </View>
+//   );
+// };
+
+// const styles = StyleSheet.create({
+//   container: {
+//     position: 'relative',
+//     height: 100,
+//   },
+//   card: {
+//     width: 120,
+//     height: 80,
+//     backgroundColor: 'lightblue',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     borderRadius: 10,
+//     marginHorizontal: 5,
+//   },
+//   arrowLeft: {
+//     position: 'absolute',
+//     top: '50%',
+//     left: 0,
+//     transform: [{ translateY: -12 }],
+//   },
+//   arrowRight: {
+//     position: 'absolute',
+//     top: '50%',
+//     right: 0,
+//     transform: [{ translateY: -12 }],
+//   },
+//   modalContainer: {
+//     position: 'absolute',
+//     top: '50%',
+//     left: '50%',
+//     transform: [{ translateX: -viewportWidth * 0.4 }, { translateY: -viewportWidth * 0.2 }],
+//     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+//     padding: 20,
+//     borderRadius: 10,
+//   },
+//   modal: {
+//     backgroundColor: 'white',
+//     padding: 20,
+//     borderRadius: 10,
+//   },
+//   closeButton: {
+//     marginTop: 10,
+//     backgroundColor: 'lightgray',
+//     paddingVertical: 10,
+//     paddingHorizontal: 20,
+//     borderRadius: 5,
+//   },
+// });
+
+// export default Activities;
+
+
+
+
+
+
+
+
+
+
 
 
 

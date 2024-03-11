@@ -16,6 +16,7 @@ const VideoCallCarousel: React.FC = () => {
   ]);
 
   const scrollViewRef = useRef<Carousel<any>>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const handleCall = (phoneNumber: string) => {
     const url = `tel:${phoneNumber}`;
