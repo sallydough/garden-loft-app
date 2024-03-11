@@ -2,13 +2,11 @@ import React, { useState, useRef } from "react";
 import {
   View,
   Text,
-  ScrollView,
   StyleSheet,
   Dimensions,
   TouchableOpacity,
 } from "react-native";
 import Carousel from "react-native-snap-carousel";
-
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import VideoCall from "../CarouselTwo/VideoCall";
@@ -71,7 +69,6 @@ const data: Item[] = [
 const Home: React.FC = () => {
   const [showVideoCall, setShowVideoCall] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
-
   const scrollViewRef = useRef<Carousel<Item>>(null);
 
   const handleSnapToItem = (index: number) => {
@@ -148,7 +145,7 @@ const Home: React.FC = () => {
       {/* Bottom component */}
       <Text style={styles.carousel2}>{data[activeIndex].component && data[activeIndex].component}</Text>
       
-
+      {/* Arrow Keys */}
       <TouchableOpacity
         style={styles.arrowLeft}
         onPress={() => scrollViewRef.current?.snapToPrev()}
@@ -169,7 +166,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    marginTop: 60,
+    marginTop: 10,
     flexDirection: "column",
     gap: 5,
   },carousel1: {
@@ -179,7 +176,7 @@ const styles = StyleSheet.create({
   },
 prompt: {
     fontSize: 30,
-    marginBottom: 25,
+    marginBottom: 15,
   },
   item: {
     width: viewportWidth * 0.17,
