@@ -1,11 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Dimensions, Button, Linking } from 'react-native';
-import axios from 'axios';
-import Carousel, { CarouselStatic } from 'react-native-snap-carousel';
-import moment from 'moment-timezone';
-import { FontAwesome } from '@expo/vector-icons';
+import React, { useState, useEffect, useRef } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Dimensions,
+  Button,
+  Linking,
+} from "react-native";
+import axios from "axios";
+import Carousel, { CarouselStatic } from "react-native-snap-carousel";
+import moment from "moment-timezone";
+import { FontAwesome } from "@expo/vector-icons";
 
-const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
+const { width: viewportWidth, height: viewportHeight } =
+  Dimensions.get("window");
 
 interface EventItem {
   item: string;
@@ -25,34 +34,47 @@ const Activities: React.FC = () => {
     const fetchEvents = async () => {
       try {
         const response = await axios.get(
-          'https://api.signupgenius.com/v2/k/signups/report/filled/47293846/?user_key=UmNrVWhyYWwrVGhtQmdXeVpweTBZZz09'
+          "https://api.signupgenius.com/v2/k/signups/report/filled/47293846/?user_key=UmNrVWhyYWwrVGhtQmdXeVpweTBZZz09"
         );
         if (!response.data.success) {
-          throw new Error('Failed to retrieve signed-up activities.');
+          throw new Error("Failed to retrieve signed-up activities.");
         }
         const eventData = response.data.data.signup.map((item: any) => ({
           item: item.item,
-          startDate: moment.tz(item.startdatestring.replace(/-/g, 'T'), 'YYYY/MM/DD HH:mm', '').toDate(),
-          endDate: item.enddatestring ? moment.tz(item.enddatestring.replace(/-/g, 'T'), 'YYYY/MM/DD HH:mm:ss', '').toDate() : undefined,
+          startDate: moment
+            .tz(item.startdatestring.replace(/-/g, "T"), "YYYY/MM/DD HH:mm", "")
+            .toDate(),
+          endDate: item.enddatestring
+            ? moment
+                .tz(
+                  item.enddatestring.replace(/-/g, "T"),
+                  "YYYY/MM/DD HH:mm:ss",
+                  ""
+                )
+                .toDate()
+            : undefined,
+          // Fetches Zoom link from Sign Up Genius
           zoomLink:
-          item.location === "Zoom Meeting"
-            ? "https://us06web.zoom.us/j/87666824017?pwd=RUZLSFVabjhtWjJVSm1CcDZsZXcrUT09"
-            : null,
+            item.location === "Zoom Meeting"
+              ? "https://us06web.zoom.us/j/87666824017?pwd=RUZLSFVabjhtWjJVSm1CcDZsZXcrUT09"
+              : null,
         }));
         // Sort events array by startDate in chronological order
         eventData.sort((a, b) => a.startDate - b.startDate);
         setEvents(eventData);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching signed-up activities:', error.message);
-        setError('Failed to retrieve signed-up activities. Please try again later.');
+        console.error("Error fetching signed-up activities:", error.message);
+        setError(
+          "Failed to retrieve signed-up activities. Please try again later."
+        );
         setLoading(false);
       }
     };
 
     fetchEvents();
   }, []);
-
+  // Use to Scroll Carousel
   const scrollViewRef = useRef<CarouselStatic<EventItem> | null>(null);
 
   const scrollToNext = () => {
@@ -81,16 +103,22 @@ const Activities: React.FC = () => {
     setSelectedEvent(null);
   };
 
+  // Renders modal to Activities start times
   const renderModalContent = (event: EventItem) => {
     const currentTime = new Date();
     const tenMinutesBeforeStartTime = new Date(event.startDate);
-    tenMinutesBeforeStartTime.setMinutes(tenMinutesBeforeStartTime.getMinutes() - 10);
+    tenMinutesBeforeStartTime.setMinutes(
+      tenMinutesBeforeStartTime.getMinutes() - 10
+    );
 
     if (event.endDate && currentTime > event.endDate) {
       return <Text>Event ended.</Text>;
     } else if (currentTime < tenMinutesBeforeStartTime) {
       return <Text>Event has not started yet.</Text>;
-    } else if (currentTime >= tenMinutesBeforeStartTime && currentTime < event.endDate) {
+    } else if (
+      currentTime >= tenMinutesBeforeStartTime &&
+      currentTime < event.endDate
+    ) {
       return (
         <Button
           title="Join Now"
@@ -100,27 +128,29 @@ const Activities: React.FC = () => {
         />
       );
     } else if (event.startDate <= currentTime && currentTime < event.endDate) {
-      return (
-        <Button
-          title="Event in progress"
-          disabled
-        />
-      );
+      return <Button title="Event in progress" disabled />;
     } else {
       return null; // Event has ended
     }
   };
 
+  // Renders carousel card items
   const renderItem = ({ item, index }: { item: EventItem; index: number }) => (
     <TouchableOpacity
       key={index}
-      style={[styles.cardContainer, { backgroundColor: index === activeIndex + 3 ? "#f3b718" : "#f09030" }]}
-      onPress={() => navigateToZoomLink(item)}>
+      style={[
+        styles.cardContainer,
+        { backgroundColor: index === activeIndex + 3 ? "#f3b718" : "#f09030" },
+      ]}
+      onPress={() => navigateToZoomLink(item)}
+    >
       <Text style={styles.cardText}>{item.item}</Text>
-      <Text style={styles.cardTextTime}>{moment(item.startDate).format('dddd MMMM Do, h:mm a')}</Text>
+      <Text style={styles.cardTextTime}>
+        {moment(item.startDate).format("dddd MMMM Do, h:mm a")}
+      </Text>
     </TouchableOpacity>
   );
-
+  // Handles carousel navigation snap style
   const handleSnapToItem = (index: number) => {
     setActiveIndex(index);
   };
@@ -135,9 +165,9 @@ const Activities: React.FC = () => {
         <>
           <Carousel
             data={events}
-            layout={'default'}
+            layout={"default"}
             renderItem={renderItem}
-            sliderWidth={Math.round(viewportWidth * 0.90)}
+            sliderWidth={Math.round(viewportWidth * 0.9)}
             itemWidth={Math.round(viewportWidth * 0.3)}
             loop={true}
             useScrollView={true}
@@ -147,14 +177,20 @@ const Activities: React.FC = () => {
             inactiveSlideOpacity={1}
             onSnapToItem={(index) => handleSnapToItem(index)} // Handle snapping logic
           />
-
-          <Text style={styles.prompt}>{events[activeIndex].prompt && events[activeIndex].prompt}</Text>
+          {/* Prompt Below */}
+          <Text style={styles.prompt}>
+            {events[activeIndex].prompt && events[activeIndex].prompt}
+          </Text>
 
           <TouchableOpacity style={styles.arrowLeft} onPress={scrollToPrevious}>
             <FontAwesome name="angle-left" size={124} color="rgb(45, 62, 95)" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.arrowRight} onPress={scrollToNext}>
-            <FontAwesome name="angle-right" size={124} color="rgb(45, 62, 95)" />
+            <FontAwesome
+              name="angle-right"
+              size={124}
+              color="rgb(45, 62, 95)"
+            />
           </TouchableOpacity>
 
           {isModalOpen && selectedEvent && (
@@ -162,10 +198,18 @@ const Activities: React.FC = () => {
               <View style={styles.modal}>
                 <Text>{selectedEvent.item}</Text>
                 {selectedEvent.endDate && (
-                  <Text>End Date: {moment(selectedEvent.endDate).format('dddd MMMM Do, h:mm a')}</Text>
+                  <Text>
+                    End Date:{" "}
+                    {moment(selectedEvent.endDate).format(
+                      "dddd MMMM Do, h:mm a"
+                    )}
+                  </Text>
                 )}
                 {renderModalContent(selectedEvent)}
-                <TouchableOpacity onPress={closeModal} style={styles.closeButton}>
+                <TouchableOpacity
+                  onPress={closeModal}
+                  style={styles.closeButton}
+                >
                   <Text>Close</Text>
                 </TouchableOpacity>
               </View>
@@ -179,32 +223,32 @@ const Activities: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'relative',
+    position: "relative",
     height: 290,
-    alignItems: 'center',
+    alignItems: "center",
   },
   cardContainer: {
     width: viewportWidth * 0.3, // Adjusted to show 3 cards at a time
     height: viewportHeight * 0.3, // Adjusted to fit the content
-    backgroundColor: '#f09030',
+    backgroundColor: "#f09030",
     borderRadius: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginHorizontal: 5,
-    flexDirection: 'column',
+    flexDirection: "column",
     gap: 10,
   },
   cardText: {
     fontSize: 30, // Adjusted font size
-    color: '#393939',
-    fontWeight: '700',
-    textAlign: 'center'
+    color: "#393939",
+    fontWeight: "700",
+    textAlign: "center",
   },
   cardTextTime: {
     fontSize: 20, // Adjusted font size
-    color: '#393939',
-    fontWeight: '600',
-    textAlign: 'center'
+    color: "#393939",
+    fontWeight: "600",
+    textAlign: "center",
   },
   loading: {
     fontSize: 30,
@@ -216,34 +260,37 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   arrowLeft: {
-    position: 'absolute',
-    top: '40%',
+    position: "absolute",
+    top: "40%",
     left: -17,
     transform: [{ translateY: -50 }],
   },
   arrowRight: {
-    position: 'absolute',
-    top: '40%',
+    position: "absolute",
+    top: "40%",
     right: -25,
     transform: [{ translateY: -50 }],
   },
   modalContainer: {
-    position: 'absolute',
-    top: '30%',
-    left: '74%',
-    transform: [{ translateX: -viewportWidth * 0.4 }, { translateY: -viewportWidth * 0.2 }],
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    position: "absolute",
+    top: "30%",
+    left: "74%",
+    transform: [
+      { translateX: -viewportWidth * 0.4 },
+      { translateY: -viewportWidth * 0.2 },
+    ],
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
     padding: 20,
     borderRadius: 10,
   },
   modal: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     padding: 60,
     borderRadius: 10,
   },
   closeButton: {
     marginTop: 10,
-    backgroundColor: 'lightgray',
+    backgroundColor: "lightgray",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
