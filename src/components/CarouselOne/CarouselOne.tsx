@@ -31,7 +31,7 @@ const data: Item[] = [
   {
     title: "ACTIVITIES",
     icon: "weight-lifter",
-    component: <Activities2 />,
+    component: <Activities />,
     prompt: "Join an Activity?",
   },
   {
