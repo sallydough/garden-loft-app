@@ -3,6 +3,7 @@ import { StyleSheet , Text, View } from 'react-native';
 import CarouselOne from '@/src/components/CarouselOne/CarouselOne';
 import HelpButton from '@/src/components/HelpButton/HelpButton';
 // import LoginSignUp from '@/src/components/CarouselTwo/LoginSignUp';
+// import Activities from '@/src/components/CarouselTwo/Activities';
 
 
 
@@ -11,8 +12,8 @@ export default function TabOneScreen() {
     <View style={styles.container}>
       <HelpButton />
       <CarouselOne />
-      {/* <Activities />
-      <LoginSignUp/> */}
+      {/* <Activities /> */}
+      {/* <LoginSignUp/> */}
 
     </View>
   );
