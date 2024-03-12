@@ -8,11 +8,11 @@ const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window'
 
 const Gallery: React.FC = () => {
   const [contacts, setContacts] = useState([
-    { id: 1, name: 'Picture 1', phoneNumber: '1234567890' },
-    { id: 2, name: 'Picture 2', phoneNumber: '0987654321' },
-    { id: 3, name: 'Picture 3', phoneNumber: '9876543210' },
-    { id: 4, name: 'Picture 4', phoneNumber: '0123456789' },
-    { id: 5, name: 'Picture 5', phoneNumber: '6789012345' },
+    { id: 1, name: 'Picture 1', phoneNumber: '1234567890', prompt:'' },
+    { id: 2, name: 'Picture 2', phoneNumber: '0987654321', prompt:'' },
+    { id: 3, name: 'Picture 3', phoneNumber: '9876543210', prompt:'' },
+    { id: 4, name: 'Picture 4', phoneNumber: '0123456789', prompt:'' },
+    { id: 5, name: 'Picture 5', phoneNumber: '6789012345', prompt:'' },
   ]);
 
   const scrollViewRef = useRef<ScrollView>(null);
@@ -56,6 +56,9 @@ const Gallery: React.FC = () => {
         onSnapToItem={(index) => handleSnapToItem(index)} // Handle snapping logic
       />
 
+       {/* Prompt */}
+       <Text style={styles.prompt}>{contacts[activeIndex].prompt && contacts[activeIndex].prompt}</Text>
+
       <TouchableOpacity style={styles.arrowLeft} onPress={() => scrollViewRef.current?.snapToPrev()}>
         <FontAwesome name="angle-left" size={124} color="rgb(45, 62, 95)" />
       </TouchableOpacity>
@@ -82,6 +85,10 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     flexDirection: 'column',
     gap: 25,
+  },
+  prompt: {
+    fontSize: 30,
+    marginBottom: 15,
   },
   cardText: {
     fontSize: 36,
