@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions, Button, Linking } from 'react-native';
 import axios from 'axios';
 import Carousel, { CarouselStatic } from 'react-native-snap-carousel';
 import moment from 'moment-timezone';
@@ -34,6 +34,10 @@ const Activities: React.FC = () => {
           item: item.item,
           startDate: moment.tz(item.startdatestring.replace(/-/g, 'T'), 'YYYY/MM/DD HH:mm', '').toDate(),
           endDate: item.enddatestring ? moment.tz(item.enddatestring.replace(/-/g, 'T'), 'YYYY/MM/DD HH:mm:ss', '').toDate() : undefined,
+          zoomLink:
+          item.location === "Zoom Meeting"
+            ? "https://us06web.zoom.us/j/87666824017?pwd=RUZLSFVabjhtWjJVSm1CcDZsZXcrUT09"
+            : null,
         }));
         // Sort events array by startDate in chronological order
         eventData.sort((a, b) => a.startDate - b.startDate);
@@ -79,12 +83,31 @@ const Activities: React.FC = () => {
 
   const renderModalContent = (event: EventItem) => {
     const currentTime = new Date();
+    const tenMinutesBeforeStartTime = new Date(event.startDate);
+    tenMinutesBeforeStartTime.setMinutes(tenMinutesBeforeStartTime.getMinutes() - 10);
+
     if (event.endDate && currentTime > event.endDate) {
       return <Text>Event ended.</Text>;
-    } else if (event.startDate > currentTime) {
+    } else if (currentTime < tenMinutesBeforeStartTime) {
       return <Text>Event has not started yet.</Text>;
+    } else if (currentTime >= tenMinutesBeforeStartTime && currentTime < event.endDate) {
+      return (
+        <Button
+          title="Join Now"
+          onPress={() => {
+            Linking.openURL(selectedEvent.zoomLink);
+          }}
+        />
+      );
+    } else if (event.startDate <= currentTime && currentTime < event.endDate) {
+      return (
+        <Button
+          title="Event in progress"
+          disabled
+        />
+      );
     } else {
-      return <Text>Join now!</Text>;
+      return null; // Event has ended
     }
   };
 
@@ -206,8 +229,8 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     position: 'absolute',
-    top: '50%',
-    left: '50%',
+    top: '30%',
+    left: '74%',
     transform: [{ translateX: -viewportWidth * 0.4 }, { translateY: -viewportWidth * 0.2 }],
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     padding: 20,
@@ -215,7 +238,7 @@ const styles = StyleSheet.create({
   },
   modal: {
     backgroundColor: 'white',
-    padding: 20,
+    padding: 60,
     borderRadius: 10,
   },
   closeButton: {
