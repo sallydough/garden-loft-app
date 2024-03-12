@@ -203,6 +203,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-nati
 import axios from 'axios';
 import Carousel, { CarouselStatic } from 'react-native-snap-carousel';
 import moment from 'moment-timezone';
+import { FontAwesome } from '@expo/vector-icons';
 
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
 
@@ -231,8 +232,8 @@ const Activities2: React.FC = () => {
         }
         const eventData = response.data.data.signup.map((item: any) => ({
           item: item.item,
-          startDate: moment.tz(item.startdatestring.replace(/-/g, 'T'), 'YYYY/MM/DD HH:mm', 'Edmonton/Mountain').toDate(),
-          endDate: item.enddatestring ? moment.tz(item.enddatestring.replace(/-/g, 'T'), 'YYYY/MM/DD HH:mm:ss', 'Edmonton/America').toDate() : undefined,
+          startDate: moment.tz(item.startdatestring.replace(/-/g, 'T'), 'YYYY/MM/DD HH:mm', '').toDate(),
+          endDate: item.enddatestring ? moment.tz(item.enddatestring.replace(/-/g, 'T'), 'YYYY/MM/DD HH:mm:ss', '').toDate() : undefined,
         }));
         setEvents(eventData);
         setLoading(false);
@@ -324,12 +325,12 @@ const Activities2: React.FC = () => {
 
           <Text style={styles.prompt}>{events[activeIndex].prompt && events[activeIndex].prompt}</Text>
 
-          <TouchableOpacity style={styles.arrowLeft} onPress={scrollToPrevious}>
-            <Text>{'<'}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.arrowRight} onPress={scrollToNext}>
-            <Text>{'>'}</Text>
-          </TouchableOpacity>
+          <TouchableOpacity style={styles.arrowLeft} onPress={() => scrollViewRef.current?.snapToPrev()}>
+        <FontAwesome name="angle-left" size={124} color="rgb(45, 62, 95)" />
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.arrowRight} onPress={() => scrollViewRef.current?.snapToNext()}>
+        <FontAwesome name="angle-right" size={124} color="rgb(45, 62, 95)" />
+      </TouchableOpacity>
 
           {isModalOpen && selectedEvent && (
             <View style={styles.modalContainer}>
