@@ -13,7 +13,7 @@ interface EventItem {
   endDate?: Date;
 }
 
-const Activities2: React.FC = () => {
+const Activities: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [events, setEvents] = useState<EventItem[]>([]);
@@ -35,6 +35,8 @@ const Activities2: React.FC = () => {
           startDate: moment.tz(item.startdatestring.replace(/-/g, 'T'), 'YYYY/MM/DD HH:mm', '').toDate(),
           endDate: item.enddatestring ? moment.tz(item.enddatestring.replace(/-/g, 'T'), 'YYYY/MM/DD HH:mm:ss', '').toDate() : undefined,
         }));
+        // Sort events array by startDate in chronological order
+        eventData.sort((a, b) => a.startDate - b.startDate);
         setEvents(eventData);
         setLoading(false);
       } catch (error) {
@@ -125,12 +127,12 @@ const Activities2: React.FC = () => {
 
           <Text style={styles.prompt}>{events[activeIndex].prompt && events[activeIndex].prompt}</Text>
 
-          <TouchableOpacity style={styles.arrowLeft} onPress={() => scrollViewRef.current?.snapToPrev()}>
-        <FontAwesome name="angle-left" size={124} color="rgb(45, 62, 95)" />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.arrowRight} onPress={() => scrollViewRef.current?.snapToNext()}>
-        <FontAwesome name="angle-right" size={124} color="rgb(45, 62, 95)" />
-      </TouchableOpacity>
+          <TouchableOpacity style={styles.arrowLeft} onPress={scrollToPrevious}>
+            <FontAwesome name="angle-left" size={124} color="rgb(45, 62, 95)" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.arrowRight} onPress={scrollToNext}>
+            <FontAwesome name="angle-right" size={124} color="rgb(45, 62, 95)" />
+          </TouchableOpacity>
 
           {isModalOpen && selectedEvent && (
             <View style={styles.modalContainer}>
@@ -139,7 +141,7 @@ const Activities2: React.FC = () => {
                 {selectedEvent.endDate && (
                   <Text>End Date: {moment(selectedEvent.endDate).format('dddd MMMM Do, h:mm a')}</Text>
                 )}
-                 {renderModalContent(selectedEvent)}
+                {renderModalContent(selectedEvent)}
                 <TouchableOpacity onPress={closeModal} style={styles.closeButton}>
                   <Text>Close</Text>
                 </TouchableOpacity>
@@ -225,19 +227,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Activities2;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default Activities;
