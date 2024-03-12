@@ -204,7 +204,7 @@ import axios from 'axios';
 import Carousel, { CarouselStatic } from 'react-native-snap-carousel';
 import moment from 'moment-timezone';
 
-const { width: viewportWidth } = Dimensions.get('window');
+const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
 
 interface EventItem {
   item: string;
@@ -232,7 +232,7 @@ const Activities2: React.FC = () => {
         const eventData = response.data.data.signup.map((item: any) => ({
           item: item.item,
           startDate: moment.tz(item.startdatestring.replace(/-/g, 'T'), 'YYYY/MM/DD HH:mm', 'Edmonton/Mountain').toDate(),
-          endDate: item.enddatestring ? moment.tz(item.enddatestring.replace(/-/g, 'T'), 'YYYY/MM/DD HH:mm:ss', 'Edmonton/Mountain').toDate() : undefined,
+          endDate: item.enddatestring ? moment.tz(item.enddatestring.replace(/-/g, 'T'), 'YYYY/MM/DD HH:mm:ss', 'Edmonton/America').toDate() : undefined,
         }));
         setEvents(eventData);
         setLoading(false);
@@ -274,13 +274,24 @@ const Activities2: React.FC = () => {
     setSelectedEvent(null);
   };
 
+  const renderModalContent = (event: EventItem) => {
+    const currentTime = new Date();
+    if (event.endDate && currentTime > event.endDate) {
+      return <Text>Event ended.</Text>;
+    } else if (event.startDate > currentTime) {
+      return <Text>Event has not started yet.</Text>;
+    } else {
+      return <Text>Join now!</Text>;
+    }
+  };
+
   const renderItem = ({ item, index }: { item: EventItem; index: number }) => (
     <TouchableOpacity
       key={index}
       style={[styles.cardContainer, { backgroundColor: index === activeIndex + 3 ? "#f3b718" : "#f09030" }]}
       onPress={() => navigateToZoomLink(item)}>
       <Text style={styles.cardText}>{item.item}</Text>
-      <Text style={styles.cardText}>{moment(item.startDate).format('dddd MMMM Do, h:mm a')}</Text>
+      <Text style={styles.cardTextTime}>{moment(item.startDate).format('dddd MMMM Do, h:mm a')}</Text>
     </TouchableOpacity>
   );
 
@@ -327,6 +338,7 @@ const Activities2: React.FC = () => {
                 {selectedEvent.endDate && (
                   <Text>End Date: {moment(selectedEvent.endDate).format('dddd MMMM Do, h:mm a')}</Text>
                 )}
+                 {renderModalContent(selectedEvent)}
                 <TouchableOpacity onPress={closeModal} style={styles.closeButton}>
                   <Text>Close</Text>
                 </TouchableOpacity>
@@ -347,7 +359,7 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     width: viewportWidth * 0.3, // Adjusted to show 3 cards at a time
-    height: 120, // Adjusted to fit the content
+    height: viewportHeight * 0.3, // Adjusted to fit the content
     backgroundColor: '#f09030',
     borderRadius: 30,
     justifyContent: 'center',
@@ -357,9 +369,15 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   cardText: {
-    fontSize: 12, // Adjusted font size
+    fontSize: 30, // Adjusted font size
     color: '#393939',
     fontWeight: '700',
+    textAlign: 'center'
+  },
+  cardTextTime: {
+    fontSize: 20, // Adjusted font size
+    color: '#393939',
+    fontWeight: '600',
     textAlign: 'center'
   },
   prompt: {
