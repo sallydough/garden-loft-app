@@ -136,7 +136,9 @@ const Home: React.FC = () => {
         activeSlideAlignment="center"
         ref={scrollViewRef}
         inactiveSlideScale={0.8} // Scale of inactive slides
-        inactiveSlideOpacity={0.7}
+        inactiveSlideOpacity={
+          
+          1}
         onSnapToItem={(index) => handleSnapToItem(index)} // Handle snapping logic
       />
       {/* Prompt */}
