@@ -39,6 +39,7 @@ const Activities: React.FC = () => {
         if (!response.data.success) {
           throw new Error("Failed to retrieve signed-up activities.");
         }
+        const currentTime = new Date();
         const eventData = response.data.data.signup.map((item: any) => ({
           item: item.item,
           startDate: moment
@@ -58,7 +59,8 @@ const Activities: React.FC = () => {
             item.location === "Zoom Meeting"
               ? "https://us06web.zoom.us/j/87666824017?pwd=RUZLSFVabjhtWjJVSm1CcDZsZXcrUT09"
               : null,
-        }));
+        }))
+        .filter((event: EventItem) => event.startDate > currentTime); //Filter out past events
         // Sort events array by startDate in chronological order
         eventData.sort((a, b) => a.startDate - b.startDate);
         setEvents(eventData);
@@ -178,9 +180,9 @@ const Activities: React.FC = () => {
             onSnapToItem={(index) => handleSnapToItem(index)} // Handle snapping logic
           />
           {/* Prompt Below */}
-          <Text style={styles.prompt}>
+          {/* <Text style={styles.prompt}>
             {events[activeIndex].prompt && events[activeIndex].prompt}
-          </Text>
+          </Text> */}
 
           <TouchableOpacity style={styles.arrowLeft} onPress={scrollToPrevious}>
             <FontAwesome name="angle-left" size={124} color="rgb(45, 62, 95)" />
