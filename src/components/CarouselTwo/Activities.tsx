@@ -276,9 +276,9 @@ const styles = StyleSheet.create({
   modalContainer: {
     position: "absolute",
     top: "30%",
-    left: "74%",
+    // left: "74%",
     transform: [
-      { translateX: -viewportWidth * 0.4 },
+      { translateX: -viewportWidth * 0.01 }, //for ios is 4
       { translateY: -viewportWidth * 0.2 },
     ],
     backgroundColor: "rgba(0, 0, 0, 0.5)",

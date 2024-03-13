@@ -9,8 +9,8 @@ const { width: viewportWidth, height: viewportHeight } = Dimensions.get("window"
 const HelpButton: React.FC = () => {
   const handleCallSupport = async () => {
     try {
-      const phoneNumber = 'tel:+14035102393'; // Replace with your actual phone number
-      const supported = await Linking.canOpenURL(phoneNumber); // Check if URL can be handled
+      const phoneNumber = '+14035102393'; // Replace with your actual phone number
+      const supported = await Linking.canOpenURL(`tel:${phoneNumber}`); // Check if URL can be handled
 
       if (supported) {
         await Linking.openURL(phoneNumber);
