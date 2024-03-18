@@ -49,14 +49,16 @@
 
 
 import React from 'react';
-import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity, Button } from 'react-native';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { TwilioVoice } from 'react-native-twilio-programmable-voice'; // Import Twilio Voice SDK
+// import { TwilioVoice } from 'react-native-twilio-programmable-voice'; // Import Twilio Voice SDK
 import * as Linking from 'expo-linking';
+import { FIREBASE_AUTH } from '@/FirebaseConfig';
 
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get("window");
 
-const HelpButton: React.FC = () => {
+
+const HelpButton: React.FC = (() => {
   const handleCallSupport = async () => {
     try {
       // Replace with your Twilio access token
@@ -78,10 +80,10 @@ const HelpButton: React.FC = () => {
         <MaterialCommunityIcons name="phone-classic" size={52} color="#f3b718" />
         <Text style={{ color: '#2E3E5E', fontSize: 30, padding: 10, }}>Call Support</Text>
       </TouchableOpacity>
-      <Text style={{ color: '#2E3E5E', fontSize: 32, padding: 10 }}>Welcome </Text>
+      <TouchableOpacity style={styles.logOut} onPress={() => FIREBASE_AUTH.signOut() }><Text style={styles.logOut}>Log Out</Text></TouchableOpacity>
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -90,6 +92,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 15,
   },
+  logOut: {
+    // backgroundColor: '#59ACCE', 
+    color: '#2E3E5E', 
+    fontSize: 30, 
+    padding: 10, 
+    borderRadius: 7}
 });
 
 export default HelpButton;
