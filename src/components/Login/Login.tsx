@@ -6,11 +6,16 @@ import {
   ActivityIndicator,
   Button,
   KeyboardAvoidingView,
+  Dimensions,
+  Image,
 } from "react-native";
 import React, { useState } from "react";
 import { FIREBASE_AUTH } from "@/FirebaseConfig";
 import { createUserWithEmailAndPassword } from "@firebase/auth";
 import {signInWithEmailAndPassword} from "@firebase/auth";
+
+const { width: viewportWidth, height: viewportHeight } =
+  Dimensions.get("window");
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -57,6 +62,7 @@ const Login = () => {
     
     <View style={styles.container}>
      <KeyboardAvoidingView behavior="padding"> 
+     <Image source={require('../../../assets/images/garden-loft-logo2.png')} style={{ width: 355, height: 172, alignSelf: 'center', marginBottom: 30,}} />
       <Text style={styles.welcome}>Welcome Garden Loft Residents</Text>
       <TextInput
         value={email}
@@ -65,7 +71,8 @@ const Login = () => {
         autoCapitalize="none"
         onChangeText={(text) => setEmail(text)}
       ></TextInput>
-      <TextInput
+      <TextInput 
+       
         secureTextEntry={true}
         value={password}
         style={styles.input}
@@ -94,15 +101,28 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 20,
     backgroundColor: "#FCF8E3",
+    width: viewportWidth * 1, // Adjusted to show 3 cards at a time
+    height: viewportHeight * 1, // Adjusted to fit the content
+    alignSelf: 'center',
   },
   input: {
     borderColor: "black",
     backgroundColor: "white",
     padding: 30,
+    width: viewportWidth * 0.4, // Adjusted to show 3 cards at a time
+    height: viewportHeight * 0.1, // Adjusted to fit the content
+    alignSelf: 'center',
+    borderRadius: 30,
+    marginBottom: 30,
+  
   },
   welcome: {
     fontSize: 40,
-    color: "grey",
+
+    color: "#f09030",
+    alignSelf: 'center',
+    marginBottom: 30,
     
   },
+  
 });
