@@ -15,7 +15,7 @@ import Lights from "../CarouselTwo/Lights";
 import Entertainment from "../CarouselTwo/Entertainment";
 import Gallery from "../CarouselTwo/Gallery";
 import GLCommunity from "../CarouselTwo/GLCommunity";
-import Activities2 from "../CarouselTwo/Activities2";
+import { FIRESTORE_DB } from "@/FirebaseConfig";
 
 const { width: viewportWidth, height: viewportHeight } =
   Dimensions.get("window");
@@ -69,11 +69,15 @@ const data: Item[] = [
 const Home: React.FC = () => {
   const [showVideoCall, setShowVideoCall] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+
   const scrollViewRef = useRef<Carousel<Item>>(null);
 
   const handleSnapToItem = (index: number) => {
     setActiveIndex(index);
   };
+
+
+
 
   const renderItem = ({ item, index }: { item: Item; index: number }) => (
     <TouchableOpacity onPress={() => handleCardPress(item, index)}>

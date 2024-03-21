@@ -10,9 +10,12 @@ import {
   Image,
 } from "react-native";
 import React, { useState } from "react";
-import { FIREBASE_AUTH } from "@/FirebaseConfig";
+import { FIREBASE_AUTH, FIRESTORE_DB } from "@/FirebaseConfig";
 import { createUserWithEmailAndPassword } from "@firebase/auth";
 import {signInWithEmailAndPassword} from "@firebase/auth";
+import { doc, setDoc} from 'firebase/firestore';
+
+
 
 const { width: viewportWidth, height: viewportHeight } =
   Dimensions.get("window");
@@ -28,7 +31,7 @@ const Login = () => {
     try {
       const response = await signInWithEmailAndPassword(
         auth,
-        email,
+        email.trim(),
         password
       );
       console.log(response);
@@ -40,23 +43,58 @@ const Login = () => {
     }
   };
 
-  const signUp = async () => {
-    setLoading(true);
-    try {
-      const response = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      console.log(response);
-      alert("Check your email");
-    } catch (error: any) {
-      console.log(error);
-      alert("Sign in failed: " + error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+//   const signUp = async () => {
+//     setLoading(true);
+//     try {
+//       //create User and get response:
+//       const response = await createUserWithEmailAndPassword(
+//         auth,
+//         email,
+//         password
+//       );
+//       console.log(response);
+// //Get the user record from the response
+// const user = response.user;
+
+// //Add Sign-up Data to Firestore Database
+// //Ensure you have a firestore instance ('db') initialized and imported
+// setDoc(doc(FIRESTORE_DB, "users", user.uid), {
+//   Name: email, 
+//   })
+//   .then(() => alert('data uploaded successfully'));
+//       alert("Check your email");
+//     } catch (error: any) {
+//       console.log(error);
+//       alert("Sign in failed: " + error.message);
+//     } finally {
+//       setLoading(false);
+//     }
+  
+//   };
+const signUp = async () => {
+  setLoading(true); // Start loading
+  try {
+    // Attempt to create a new user with email and password
+    const response = await createUserWithEmailAndPassword(
+      auth,
+      email.trim(), // Remove any leading/trailing whitespace
+      password
+    );
+    // Extract user info from the response
+    const user = response.user;
+    // Save the user's email to Firestore under a collection "users" with the user's UID as the document ID
+    await setDoc(doc(FIRESTORE_DB, "users", user.uid), {
+      email: email, // Use the email from state
+    });
+    alert('Account created successfully! Check your email.');
+  } catch (error) {
+    console.error(error);
+    alert("Sign up failed: " + error.message); // Show error message
+  } finally {
+    setLoading(false); // Stop loading irrespective of success or failure
+  }
+};
+
 
   return (
     
@@ -91,7 +129,7 @@ const Login = () => {
       </KeyboardAvoidingView>
     </View>
   );
-};
+      };
 
 export default Login;
 

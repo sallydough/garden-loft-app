@@ -40,7 +40,7 @@ export default function TabOneScreen() {
 
   return (
     <NavigationContainer independent={true}>
-      <Stack.Navigator initialRouteName="login">
+      <Stack.Navigator initialRouteName="Login">
       
         <>
           {user ? (
