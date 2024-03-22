@@ -37,6 +37,8 @@
     "react-native-screens": "~3.29.0",
     "react-native-snap-carousel": "^3.9.1",
     "react-native-web": "~0.19.6",
+    "react-native-webview": "^13.8.2",
+    "react-native-youtube-iframe": "^2.3.0",
     "twilio": "^5.0.0"
   },
   "devDependencies": {

@@ -67,7 +67,7 @@ const HelpButton: React.FC = (() => {
         <Text style={{ color: '#2E3E5E', fontSize: 30, padding: 10, }}>Call Support</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.logOut} onPress={() => FIREBASE_AUTH.signOut() }><Text style={styles.logOut}>Log Out</Text></TouchableOpacity>
-      <Text style={styles.logOut}>Welcome {userInfo?.email}</Text>
+      <Text style={styles.logOut}>Welcome {userInfo?.name}</Text>
     </View>
   );
 });

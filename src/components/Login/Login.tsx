@@ -21,6 +21,7 @@ const { width: viewportWidth, height: viewportHeight } =
   Dimensions.get("window");
 
 const Login = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -85,6 +86,7 @@ const signUp = async () => {
     // Save the user's email to Firestore under a collection "users" with the user's UID as the document ID
     await setDoc(doc(FIRESTORE_DB, "users", user.uid), {
       email: email, // Use the email from state
+      name: name,
     });
     alert('Account created successfully! Check your email.');
   } catch (error) {
@@ -100,8 +102,15 @@ const signUp = async () => {
     
     <View style={styles.container}>
      <KeyboardAvoidingView behavior="padding"> 
-     <Image source={require('../../../assets/images/garden-loft-logo2.png')} style={{ width: 355, height: 172, alignSelf: 'center', marginBottom: 30,}} />
+     {/* <Image source={require('../../../assets/images/garden-loft-logo2.png')} style={{ width: 355, height: 172, alignSelf: 'center', marginBottom: 30,}} /> */}
       <Text style={styles.welcome}>Welcome Garden Loft Residents</Text>
+      <TextInput
+        value={name}
+        style={styles.input}
+        placeholder="name"
+        autoCapitalize="none"
+        onChangeText={(text) => setName(text)}
+      ></TextInput>
       <TextInput
         value={email}
         style={styles.input}
