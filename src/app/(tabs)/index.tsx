@@ -11,26 +11,26 @@ import { useState, useEffect } from "react";
 import { FIREBASE_AUTH } from "@/FirebaseConfig";
 import HomePage from "@/src/components/HomePage/HomePage";
 // App.js or your main component
-import messaging from '@react-native-firebase/messaging';
+// import messaging from '@react-native-firebase/messaging';
 
-useEffect(() => {
-  const unsubscribe = messaging().onMessage(async remoteMessage => {
-    Alert.alert('Incoming Call', `${remoteMessage.notification.title}`, [
-      { text: 'Answer', onPress: () => handleAnswerCall(remoteMessage.data.callId) },
-      { text: 'Decline', onPress: () => handleDeclineCall(remoteMessage.data.callId) },
-    ]);
-  });
+// useEffect(() => {
+//   const unsubscribe = messaging().onMessage(async remoteMessage => {
+//     Alert.alert('Incoming Call', `${remoteMessage.notification.title}`, [
+//       { text: 'Answer', onPress: () => handleAnswerCall(remoteMessage.data.callId) },
+//       { text: 'Decline', onPress: () => handleDeclineCall(remoteMessage.data.callId) },
+//     ]);
+//   });
 
-  return unsubscribe;
-}, []);
+//   return unsubscribe;
+// }, []);
 
-const handleAnswerCall = (callId) => {
-  // Navigate to the call screen and use the callId to retrieve call details
-};
+// const handleAnswerCall = (callId) => {
+//   // Navigate to the call screen and use the callId to retrieve call details
+// };
 
-const handleDeclineCall = (callId) => {
-  // Send a message to the backend to decline the call
-};
+// const handleDeclineCall = (callId) => {
+//   // Send a message to the backend to decline the call
+// };
 
 
 
