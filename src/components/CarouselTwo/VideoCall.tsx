@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Linking, Dimensions } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Linking, Dimensions, Alert } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'; // Import FontAwesome icons
 import Carousel from 'react-native-snap-carousel';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -18,26 +18,48 @@ const VideoCallCarousel: React.FC = () => {
   const scrollViewRef = useRef<Carousel<any>>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const handleCall = (phoneNumber: string) => {
-    const url = `tel:${phoneNumber}`;
-    Linking.openURL(url);
-  };
+  // const handleCall = (phoneNumber: string) => {
+  //   const url = `tel:${phoneNumber}`;
+  //   Linking.openURL(url);
+  // };
 
   const handleSnapToItem = (index: number) => {
     setActiveIndex(index);
   };
 
-  const renderItem = ({ item, index }: { item: any; index: number }) => (
-    <TouchableOpacity
-      key={item.id}
-      style={[styles.cardContainer,{
-        backgroundColor: index === activeIndex + 3 ? "#f3b718" : "#f09030",
-      },]}
-      onPress={() => handleCall(item.phoneNumber)}>
-      <MaterialCommunityIcons name="emoticon" size={94} color="white" />
-      <Text style={styles.cardText}>{item.name}</Text>
-    </TouchableOpacity>
-  );
+  // const renderItem = ({ item, index }: { item: any; index: number }) => (
+  //   <TouchableOpacity
+  //     key={item.id}
+  //     style={[styles.cardContainer,{
+  //       backgroundColor: index === activeIndex + 3 ? "#f3b718" : "#f09030",
+  //     },]}
+  //     onPress={() => handleCall(item.phoneNumber)}>
+  //     <MaterialCommunityIcons name="emoticon" size={94} color="white" />
+  //     <Text style={styles.cardText}>{item.name}</Text>
+  //   </TouchableOpacity>
+  // );
+
+    // Simulate opening a video call
+    const handleVideoCall = (contactId: number) => {
+      // Here, you'd integrate with your backend to initiate a video call
+      // For now, we'll just display an alert
+      Alert.alert("Video Call", `Starting a video call with ${contacts.find(c => c.id === contactId)?.name}...`,
+        [
+          { text: "OK" }
+        ]);
+    };
+  
+    const renderItem = ({ item, index }: { item: any; index: number }) => (
+      <TouchableOpacity
+        key={item.id}
+        style={[styles.cardContainer,{
+          backgroundColor: index === activeIndex ? "#f3b718" : "#f09030",
+        },]}
+        onPress={() => handleVideoCall(item.id)}>
+        <MaterialCommunityIcons name="video" size={94} color="white" />
+        <Text style={styles.cardText}>{item.name}</Text>
+      </TouchableOpacity>
+    );
 
   return (
     <View style={styles.container}>
