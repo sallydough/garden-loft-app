@@ -8,7 +8,7 @@
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/garden-loft-logo2.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -27,6 +27,7 @@
         "backgroundColor": "#ffffff"
       }
     },
+    
     "web": {
       "bundler": "metro",
       "output": "static",
