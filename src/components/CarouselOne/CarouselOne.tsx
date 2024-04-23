@@ -13,7 +13,7 @@ import VideoCall from "../CarouselTwo/VideoCall";
 import Activities from "../CarouselTwo/Activities";
 import Lights from "../CarouselTwo/Lights";
 import Entertainment from "../CarouselTwo/Entertainment";
-import Gallery from "../CarouselTwo/Gallery";
+import HowTo from "../CarouselTwo/HowTo";
 import GLCommunity from "../CarouselTwo/GLCommunity";
 import { FIRESTORE_DB } from "@/FirebaseConfig";
 
@@ -53,9 +53,9 @@ const data: Item[] = [
     prompt: "Watch Entertainment?",
   },
   {
-    title: "GALLERY",
-    icon: "camera-burst",
-    component: <Gallery />,
+    title: "HOW-TO VIDEOS",
+    icon: "account-question",
+    component: <HowTo />,
     prompt: "View Gallery?",
   },
   {

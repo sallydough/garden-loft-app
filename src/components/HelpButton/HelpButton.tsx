@@ -63,8 +63,8 @@ const HelpButton: React.FC = (() => {
     <View style={styles.container}>
       <Image source={require('../../../assets/images/garden-loft-logo2.png')} style={{ width: 155, height: 72 }} />
       <TouchableOpacity onPress={handleCallSupport} style={{ backgroundColor: '#59ACCE', padding: 5, paddingLeft: 10, borderRadius: 7, flexDirection: "row", }}>
-        <MaterialCommunityIcons name="phone-classic" size={52} color="#f3b718" />
-        <Text style={{ color: '#2E3E5E', fontSize: 30, padding: 10, }}>Call Support</Text>
+        <MaterialCommunityIcons name="hospital-box-outline" size={52} color="#f3b718" />
+        <Text style={{ color: '#2E3E5E', fontSize: 30, padding: 10, }}>Call Emergency</Text>
       </TouchableOpacity>
       {/* <TouchableOpacity style={styles.logOut} onPress={() => FIREBASE_AUTH.signOut() }><Text style={styles.logOut}>Log Out</Text></TouchableOpacity> */}
       <Text style={styles.logOut}>Welcome {userInfo?.name}</Text>

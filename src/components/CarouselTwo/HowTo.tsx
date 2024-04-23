@@ -8,11 +8,11 @@ const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window'
 
 const Gallery: React.FC = () => {
   const [contacts, setContacts] = useState([
-    { id: 1, name: 'Picture 1', phoneNumber: '1234567890', prompt:'' },
-    { id: 2, name: 'Picture 2', phoneNumber: '0987654321', prompt:'' },
-    { id: 3, name: 'Picture 3', phoneNumber: '9876543210', prompt:'' },
-    { id: 4, name: 'Picture 4', phoneNumber: '0123456789', prompt:'' },
-    { id: 5, name: 'Picture 5', phoneNumber: '6789012345', prompt:'' },
+    { id: 1, name: 'Welcome to Garden Loft', phoneNumber: '1234567890', prompt:'' },
+    { id: 2, name: 'How to use Just For Us App', phoneNumber: '0987654321', prompt:'' },
+    { id: 3, name: 'How to Join Activities', phoneNumber: '9876543210', prompt:'' },
+    { id: 4, name: 'How to add Garden Loft Friends', phoneNumber: '0123456789', prompt:'' },
+    { id: 5, name: 'How to Change Your Loft Lights', phoneNumber: '6789012345', prompt:'' },
   ]);
 
   const scrollViewRef = useRef<ScrollView>(null);
@@ -34,7 +34,7 @@ const Gallery: React.FC = () => {
         backgroundColor: index === activeIndex + 3 ? "#f3b718" : "#f09030",
       },]}
       onPress={() => handleCall(item.phoneNumber)}>
-      <MaterialCommunityIcons name="camera-burst" size={94} color="white" />
+      <MaterialCommunityIcons name="youtube" size={120} color="white" />
       <Text style={styles.cardText}>{item.name}</Text>
     </TouchableOpacity>
   );
@@ -91,9 +91,10 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   cardText: {
-    fontSize: 36,
+    fontSize: 30,
     color: '#393939',
     fontWeight: '700',
+    textAlign: 'center',
   },
   arrowLeft: {
     position: 'absolute',
