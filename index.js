@@ -1,10 +1,9 @@
-// import { registerRootComponent } from 'expo';
-// import { ExpoRoot } from 'expo-router';
+import { register } from "@videosdk.live/react-native-sdk";
+import VideoSDK from "./src/components/CarouselTwo/VideoSDK";
+import { registerRootComponent } from "expo";
 
-// // Must be exported or Fast Refresh won't update the context
-// export function App() {
-//   const ctx = require.context('./app');
-//   return <ExpoRoot context={ctx} />;
-// }
+// Register the service
+register();
 
-// registerRootComponent(App);
+registerRootComponent(App);
+AppRegistry.registerComponent;

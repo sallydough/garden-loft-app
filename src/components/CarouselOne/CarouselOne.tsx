@@ -16,6 +16,7 @@ import Entertainment from "../CarouselTwo/Entertainment";
 import HowTo from "../CarouselTwo/HowTo";
 import GLCommunity from "../CarouselTwo/GLCommunity";
 import { FIRESTORE_DB } from "@/FirebaseConfig";
+import VideoSDK from "../CarouselTwo/VideoSDK";
 
 const { width: viewportWidth, height: viewportHeight } =
   Dimensions.get("window");
@@ -37,7 +38,7 @@ const data: Item[] = [
   {
     title: "VIDEO CALL",
     icon: "phone",
-    component: <VideoCall />,
+    component: <VideoSDK />,
     prompt: "Make a Video Call?",
   },
   {
@@ -56,7 +57,7 @@ const data: Item[] = [
     title: "HOW-TO VIDEOS",
     icon: "account-question",
     component: <HowTo />,
-    prompt: "View Gallery?",
+    prompt: "Need Help With Your Garden Loft?",
   },
   {
     title: "LIGHTS",
