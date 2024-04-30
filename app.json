@@ -19,13 +19,18 @@
       "supportsTablet": true,
       "infoPlist": {
         "NSCameraUsageDescription": "This app uses the camera to scan barcodes on event tickets."
-      }
+      },  "UISupportedInterfaceOrientations": [
+        "UIInterfaceOrientationPortrait",
+        "UIInterfaceOrientationPortraitUpsideDown"
+      ],
+      "bundleIdentifier": "com.anonymous.gardenloftapp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.anonymous.gardenloftapp"
     },
     
     "web": {
@@ -34,7 +39,7 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router", "@config-plugins/react-native-webrtc"
     ],
     "experiments": {
       "typedRoutes": true

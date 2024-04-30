@@ -10,8 +10,9 @@ import { User, onAuthStateChanged } from "firebase/auth";
 import { useState, useEffect } from "react";
 import { FIREBASE_AUTH } from "@/FirebaseConfig";
 import HomePage from "@/src/components/HomePage/HomePage";
-// App.js or your main component
+
 // import messaging from '@react-native-firebase/messaging';
+
 
 // useEffect(() => {
 //   const unsubscribe = messaging().onMessage(async remoteMessage => {
@@ -88,11 +89,7 @@ function InsideApp() {
     <View style={styles.container}>
       <HelpButton />
       <CarouselOne />
-    {/* <HomePage /> */}
     </View>
-
-
-
   );
 }
 

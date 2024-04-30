@@ -99,18 +99,28 @@ const Entertainment = () => {
         }}
       >
         <View style={styles.modalView}>
-          <TouchableOpacity
+        <TouchableOpacity
             style={styles.closeButton}
             onPress={() => setIsModalVisible(!isModalVisible)}
           >
             <FontAwesome name="arrow-left" size={24} color="black" />
+            <Text style={styles.closeText}>Back To Garden Loft App</Text>
           </TouchableOpacity>
           {youtubeId && (
             <YoutubePlayer
-              height={viewportHeight * 0.8}
-              width={viewportWidth * 0.8}
+              height={viewportHeight}
+              width={viewportWidth}
               videoId={youtubeId}
               play={true}
+               // prevent aspect ratio auto sizing
+              // webViewProps={{
+              //   injectedJavaScript: `
+              //     var element = document.getElementsByClassName('container')[0];
+              //     element.style.position = 'unset';
+              //     element.style.paddingBottom = 'unset';
+              //     true;
+              //   `,
+              // }}
             />
           )}
         </View>
@@ -160,7 +170,7 @@ const styles = StyleSheet.create({
         transform: [{ translateY: -50 }],
       },
   modalView: {
-    margin: 20,
+    margin: 10,
     marginTop: 30,
     backgroundColor: "white",
     borderRadius: 20,
@@ -178,9 +188,23 @@ const styles = StyleSheet.create({
   },
   closeButton: {
     position: 'absolute',
-    left: 10,
-    top: 10,
+    left: 400,
+    top: 30,
+    backgroundColor: "lightblue",
+    padding: 15,
+    borderRadius: 5,
   },
+  closeText: {
+    fontSize: 24,
+    position: 'absolute',
+    left: 40,
+    top: 0,
+    width: 320, 
+    backgroundColor: "lightblue",
+    padding: 10,
+    borderRadius: 70,
+
+  }
 });
 
 export default Entertainment;
