@@ -16,7 +16,7 @@ import Entertainment from "../CarouselTwo/Entertainment";
 import HowTo from "../CarouselTwo/HowTo";
 import GLCommunity from "../CarouselTwo/GLCommunity";
 import { FIRESTORE_DB } from "@/FirebaseConfig";
-import VideoSDK from "../CarouselTwo/VideoSDK";
+// import VideoSDK from "../CarouselTwo/VideoSDK";
 
 const { width: viewportWidth, height: viewportHeight } =
   Dimensions.get("window");
@@ -38,7 +38,7 @@ const data: Item[] = [
   {
     title: "VIDEO CALL",
     icon: "phone",
-    component: <VideoSDK />,
+    component: <VideoCall />,
     prompt: "Make a Video Call?",
   },
   {
