@@ -11,6 +11,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import VideoCall from "../CarouselTwo/VideoCall";
 import Activities from "../CarouselTwo/Activities";
+import Activities2 from "../CarouselTwo/Activities2";
 import Lights from "../CarouselTwo/Lights";
 import Entertainment from "../CarouselTwo/Entertainment";
 import HowTo from "../CarouselTwo/HowTo";
@@ -32,7 +33,7 @@ const data: Item[] = [
   {
     title: "ACTIVITIES",
     icon: "weight-lifter",
-    component: <Activities />,
+    component: <Activities2 />,
     prompt: "Join an Activity?",
   },
   {
@@ -182,6 +183,7 @@ const styles = StyleSheet.create({
 prompt: {
     fontSize: 30,
     marginBottom: 15,
+    marginTop: -10,
   },
   item: {
     width: viewportWidth * 0.17,
