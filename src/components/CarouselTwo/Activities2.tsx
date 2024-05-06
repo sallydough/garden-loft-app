@@ -230,23 +230,45 @@ const Activities2: React.FC = () => {
   useEffect(() => {
     registerForPushNotificationsAsync();
     fetchEvents();
-  
-    // Listener for foreground notification handling
+
+    // This listener handles notifications when the app is in the foreground
     const foregroundSubscription = Notifications.addNotificationReceivedListener(notification => {
       Alert.alert("Notification Received", notification.request.content.body);
     });
   
-    // Listener for when the user interacts with the notification (e.g., taps on it)
+    // This listener handles when a notification is tapped
     const responseSubscription = Notifications.addNotificationResponseReceivedListener(response => {
       Alert.alert("Notification Clicked", response.notification.request.content.body);
+      // Navigate to a specific screen if necessary
     });
   
     return () => {
-      // Cleanup subscriptions when the component is unmounted
       foregroundSubscription.remove();
       responseSubscription.remove();
     };
   }, []);
+  
+
+  // useEffect(() => {
+  //   registerForPushNotificationsAsync();
+  //   fetchEvents();
+  
+  //   // Listener for foreground notification handling
+  //   const foregroundSubscription = Notifications.addNotificationReceivedListener(notification => {
+  //     Alert.alert("Notification Received", notification.request.content.body);
+  //   });
+  
+  //   // Listener for when the user interacts with the notification (e.g., taps on it)
+  //   const responseSubscription = Notifications.addNotificationResponseReceivedListener(response => {
+  //     Alert.alert("Notification Clicked", response.notification.request.content.body);
+  //   });
+  
+  //   return () => {
+  //     // Cleanup subscriptions when the component is unmounted
+  //     foregroundSubscription.remove();
+  //     responseSubscription.remove();
+  //   };
+  // }, []);
   
   async function fetchEvents() {
     try {
@@ -317,14 +339,23 @@ const Activities2: React.FC = () => {
         }
     }
 
+    // if (Platform.OS === 'android') {
+    //     Notifications.setNotificationChannelAsync('default', {
+    //         name: 'default',
+    //         importance: Notifications.AndroidImportance.MAX,
+    //         vibrationPattern: [0, 250, 250, 250],
+    //         sound: true,
+    //     });
+    // }
     if (Platform.OS === 'android') {
-        Notifications.setNotificationChannelAsync('default', {
-            name: 'default',
-            importance: Notifications.AndroidImportance.MAX,
-            vibrationPattern: [0, 250, 250, 250],
-            sound: true,
-        });
+      await Notifications.setNotificationChannelAsync('default', {
+        name: 'default',
+        importance: Notifications.AndroidImportance.MAX,
+        vibrationPattern: [0, 250, 250, 250],
+        sound: 'default', // This uses the system's default notification sound
+      });
     }
+    
 }
 
 
@@ -412,22 +443,51 @@ const Activities2: React.FC = () => {
   };
 
   
-
   const scheduleNotification = async (event) => {
-    const schedulingOptions = {
-        content: {
-            title: "Upcoming Event!",
-            body: `Your event ${event.item} is starting soon.`,
-            sound: true, // Use the default sound
-            data: { event },
-        },
-        trigger: {
-            date: new Date(event.startDate.getTime() - 10 * 60 * 1000),
-        },
-    };
-    console.log("Scheduling notification:", schedulingOptions);
-    await Notifications.scheduleNotificationAsync(schedulingOptions);
-};
+    // Scheduling 10 minutes before the event
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title: "Upcoming Activity!",
+        body: `Your activity ${event.item} is starting in 10 minutes.`,
+        sound: true, // This uses the default sound
+        data: { event },
+      },
+      trigger: {
+        date: new Date(event.startDate.getTime() - 10 * 60 * 1000), // 10 minutes before the event
+      },
+    });
+  
+    // Scheduling 1 minute before the event
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title: "Upcoming Activity!",
+        body: `Your activity ${event.item} is starting now.`,
+        sound: true, // This uses the default sound
+        data: { event },
+      },
+      trigger: {
+        date: new Date(event.startDate.getTime() - 60 * 1000), // 1 minute before the event
+      },
+    });
+  };
+  
+
+
+//   const scheduleNotification = async (event) => {
+//     const schedulingOptions = {
+//         content: {
+//             title: "Upcoming Event!",
+//             body: `Your event ${event.item} is starting soon.`,
+//             sound: true, // Use the default sound
+//             data: { event },
+//         },
+//         trigger: {
+//             date: new Date(event.startDate.getTime() - 10 * 60 * 1000),
+//         },
+//     };
+//     console.log("Scheduling notification:", schedulingOptions);
+//     await Notifications.scheduleNotificationAsync(schedulingOptions);
+// };
 
 
 
@@ -564,7 +624,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   modal: {
-    backgroundColor: "white",
+    backgroundColor: "beige",
     padding: 60,
     borderRadius: 10,
   },
