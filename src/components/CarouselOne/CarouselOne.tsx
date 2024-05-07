@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import {
   View,
+  Image,
   Text,
   StyleSheet,
   Dimensions,
@@ -10,13 +11,14 @@ import Carousel from "react-native-snap-carousel";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import VideoCall from "../CarouselTwo/VideoCall";
-import Activities from "../CarouselTwo/Activities";
+// import Activities from "../CarouselTwo/Activities";
 import Activities2 from "../CarouselTwo/Activities2";
 import Lights from "../CarouselTwo/Lights";
 import Entertainment from "../CarouselTwo/Entertainment";
 import HowTo from "../CarouselTwo/HowTo";
 import GLCommunity from "../CarouselTwo/GLCommunity";
-import { FIRESTORE_DB } from "@/FirebaseConfig";
+// import { FIRESTORE_DB } from "@/FirebaseConfig";
+import BackgroundImage from "../CarouselTwo/BackgroundImage";
 // import VideoSDK from "../CarouselTwo/VideoSDK";
 
 const { width: viewportWidth, height: viewportHeight } =
@@ -131,6 +133,8 @@ const Home: React.FC = () => {
 
   return (
     <View style={styles.container}>
+       {/* <Image source={require('../../../assets/images/garden-loft-logo-outline.png')} style={{ width: 155, height: 72 }} /> */}
+       {/* <BackgroundImage/> */}
       <Carousel style={styles.carousel1}
         layout={"default"}
         data={data}

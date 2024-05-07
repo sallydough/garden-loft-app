@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity, Button } from 'react-native';
+import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity, ImageBackground, Button } from 'react-native';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 // import { TwilioVoice } from 'react-native-twilio-programmable-voice'; // Import Twilio Voice SDK
 import * as Linking from 'expo-linking';
@@ -6,9 +6,11 @@ import React, { useState, useRef,useEffect } from "react";
 import { FIREBASE_AUTH, FIRESTORE_DB } from '@/FirebaseConfig';
 import {collection, getDocs} from 'firebase/firestore';
 import { doc, getDoc } from 'firebase/firestore';
+// import BackgroundImage from '../CarouselTwo/BackgroundImage';
 
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get("window");
-
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 const HelpButton: React.FC = (() => {
   //fetch data info into welcome 'name'
@@ -43,7 +45,21 @@ const HelpButton: React.FC = (() => {
     useEffect(() => {
       getCurrentUserData();
     }, []); 
+  
+    // const BackgroundImage = () => {
+    //   return (
+    //     <View style={styles.fullScreen}>
+    //       <Image
+    //         source={require("../../../assets/images/garden-loft-logo-line.png")}
+    //         // resizeMode="cover"
+    //         style={styles.backgroundImage}
+    //       />
+    //     </View>
+    //   );
+    // };
 
+    const image = require("../../../assets/images/garden loft-logo-outline-yellow.png")
+    
 
   const handleCallSupport = async () => {
     try {
@@ -61,13 +77,26 @@ const HelpButton: React.FC = (() => {
 
   return (
     <View style={styles.container}>
-      <Image source={require('../../../assets/images/garden-loft-logo2.png')} style={{ width: 155, height: 72 }} />
-      <TouchableOpacity onPress={handleCallSupport} style={{ backgroundColor: '#59ACCE', padding: 5, paddingLeft: 10, borderRadius: 7, flexDirection: "row", }}>
-        <MaterialCommunityIcons name="hospital-box-outline" size={52} color="#f3b718" />
-        <Text style={{ color: '#2E3E5E', fontSize: 30, padding: 10, }}>Call Emergency</Text>
-      </TouchableOpacity>
+      {/* <Image source={require('../../../assets/images/garden-loft-logo2.png')} style={{ width: 155, height: 72 }} />
+      <TouchableOpacity onPress={handleCallSupport} style={{ backgroundColor: '#59ACCE', padding: 5, paddingLeft: 10, borderRadius: 7, flexDirection: "row", }}> */}
+      {/* <Image source={require('../../../assets/images/garden-loft-logo-outline.png')} style={{ width: 155, height: 72 }} /> */}
+      <View style={styles.container2}>
+      <ImageBackground source={image}  resizeMode={"stretch"} style={styles.image}>
+      {/* <BackgroundImage /> */}
+      <Text style={styles.Welcome}>Hello {userInfo?.name}</Text>
+      </ImageBackground>
+      </View>
+      {/* <TouchableOpacity onPress={handleCallSupport} style={{ backgroundColor: '#59ACCE', padding: 5, paddingLeft: 10, borderRadius: 15, flexDirection: "row", }}>
+       
+        <Text style={{ color: '#2E3E5E',  fontSize: 28, padding: 9, }}>Call Emergency</Text>
+        <MaterialCommunityIcons name="hospital-box-outline" marginRight={7} paddingTop= {3} size={50} color="#f3b718" />
+      </TouchableOpacity> */}
+      <TouchableOpacity onPress={handleCallSupport} style={{ backgroundColor: '#59ACCE', padding: 5, paddingLeft: 10, borderRadius: 15, flexDirection: "row", alignItems: "center" }}>
+      <Text style={styles.EmergencyButton}>Call Emergency</Text>
+      <MaterialCommunityIcons name="hospital-box-outline" style={{ marginRight: 7, paddingTop: 3 }} size={50} color="#f3b718" />
+    </TouchableOpacity>
       {/* <TouchableOpacity style={styles.logOut} onPress={() => FIREBASE_AUTH.signOut() }><Text style={styles.logOut}>Log Out</Text></TouchableOpacity> */}
-      <Text style={styles.logOut}>Welcome {userInfo?.name}</Text>
+     
     </View>
   );
 });
@@ -79,12 +108,49 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 15,
   },
-  logOut: {
+
+  EmergencyButton: {
+    color: '#2E3E5E',
+     fontSize: 28, 
+     padding: 9,
+     shadowColor: '#000',
+     shadowOffset: {
+       width: 12,
+       height: 7,
+     },
+     shadowOpacity: 0.8,
+     shadowRadius: 26,
+     elevation: 10,
+
+  },
+  
+  Welcome: {
     // backgroundColor: '#59ACCE', 
     color: '#2E3E5E', 
     fontSize: 30, 
-    padding: 10, 
-    borderRadius: 7}
+    paddingTop: '1.5%', 
+    // paddingLeft: 20, 
+    borderRadius: 7},
+    
+    fullScreen: {
+      position: "absolute",
+      // paddingLeft: "10%",
+  
+      // paddingBottom: "10%",
+      // width: "10%",
+      // height: "10%",
+      opacity: 0.8, // Adjust opacity here
+    },
+    image: {
+     flex: 1,
+    //  justifyContent: "center",
+    //  alignContent: "center",
+     width: "100%",
+     height: "105%",
+
+    
+    },
+  
 });
 
 export default HelpButton;
