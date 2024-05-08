@@ -220,7 +220,7 @@
 
 
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Modal, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Modal, ScrollView , ActivityIndicator} from 'react-native';
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import Carousel from 'react-native-snap-carousel';
 import { collection, getDocs } from 'firebase/firestore';
@@ -265,6 +265,13 @@ const Entertainment = () => {
             seasons.push({ id: seasonDoc.id, ...seasonData });
           }
           categoriesData.push({ id: catDoc.id, name: catDoc.data().name, seasons });
+// if (isLoading) {
+//     return <View style={styles.container}><Text>Loading...</Text></View>;
+//   }
+  
+//   if (error) {
+//     return <View style={styles.container}><Text>{error}</Text></View>;
+//   }        
         }
         setCategories(categoriesData);
         if (categoriesData.length === 0) {
@@ -279,13 +286,7 @@ const Entertainment = () => {
     };
     fetchCategories();
   }, []);
-  if (isLoading) {
-    return <View style={styles.container}><Text>Loading...</Text></View>;
-  }
   
-  if (error) {
-    return <View style={styles.container}><Text>{error}</Text></View>;
-  }
   
 
   const openSeasonModal = (category) => {
@@ -320,7 +321,9 @@ const Entertainment = () => {
 
   return (
     <View style={styles.container}>
-      {error ? (
+      {isLoading ? (
+        <ActivityIndicator size="large" color="orange" style={styles.loading} />)
+      :error ? (
         <Text style={styles.errorText}>{error}</Text>
       ) : (
         // <Carousel
@@ -472,6 +475,13 @@ const styles = StyleSheet.create({
     color: '#393939',
     fontWeight: '700',
     marginTop: 15,
+  },
+  loading: {
+    flex: 1,
+    alignItems: "flex-start",
+    // marginTop: 30,
+    // color: "#746E6E",
+    fontSize: 44,
   },
   arrowLeft: {
     position: 'absolute',

@@ -256,7 +256,7 @@ const Activities2: React.FC = () => {
   return (
     <View style={styles.container}>
       {loading ? (
-        <ActivityIndicator size="large" color="#0000ff" style={styles.loading} />
+        <ActivityIndicator size="large" color="orange" style={styles.loading} />
       ) : error ? (
         <Text style={styles.loading}>Error: {error}</Text>
       ) : (
