@@ -104,13 +104,13 @@ const signUp = async () => {
      <KeyboardAvoidingView behavior="padding"> 
      {/* <Image source={require('../../../assets/images/garden-loft-logo2.png')} style={{ width: 355, height: 172, alignSelf: 'center', marginBottom: 30,}} /> */}
       <Text style={styles.welcome}>Welcome Garden Loft Residents</Text>
-      {/* <TextInput
+      <TextInput
         value={name}
         style={styles.input}
         placeholder="name"
         autoCapitalize="none"
         onChangeText={(text) => setName(text)}
-      ></TextInput> */}
+      ></TextInput>
       <TextInput
         value={email}
         style={styles.input}
@@ -128,7 +128,7 @@ const signUp = async () => {
         onChangeText={(text) => setPassword(text)}
       ></TextInput>
       {loading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="orange" />
       ) : (
         <>
           <Button title="Login" onPress={signIn} />

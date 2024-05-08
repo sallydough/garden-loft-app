@@ -392,14 +392,18 @@ const styles = StyleSheet.create({
      justifyContent: "center",
      alignContent: "center",
      width: "105%",
+
      height: "100%",
+
      opacity: 0.95,
     //  padding: '3%',
     // backgroundColor: "grey" ,
     shadowColor: 'goldenRod',
     shadowOffset: {
+
       width: 5,
       height: 1,
+
     },
     shadowOpacity: 0.4,
     shadowRadius: 26,
