@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import {
   View,
-  Image,
+  // Image,
   Text,
   StyleSheet,
   Dimensions,
@@ -18,7 +18,7 @@ import Entertainment from "../CarouselTwo/Entertainment";
 import HowTo from "../CarouselTwo/HowTo";
 import GLCommunity from "../CarouselTwo/GLCommunity";
 // import { FIRESTORE_DB } from "@/FirebaseConfig";
-import BackgroundImage from "../CarouselTwo/BackgroundImage";
+// import BackgroundImage from "../CarouselTwo/BackgroundImage";
 // import VideoSDK from "../CarouselTwo/VideoSDK";
 
 const { width: viewportWidth, height: viewportHeight } =
