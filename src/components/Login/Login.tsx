@@ -128,7 +128,7 @@ const signUp = async () => {
         onChangeText={(text) => setPassword(text)}
       ></TextInput>
       {loading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="orange" />
       ) : (
         <>
           <Button title="Login" onPress={signIn} />
