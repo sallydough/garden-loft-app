@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import {
   View,
+  Image,
   Text,
   StyleSheet,
   Dimensions,
@@ -10,13 +11,15 @@ import Carousel from "react-native-snap-carousel";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import VideoCall from "../CarouselTwo/VideoCall";
-import Activities from "../CarouselTwo/Activities";
+// import Activities from "../CarouselTwo/Activities";
+import Activities2 from "../CarouselTwo/Activities2";
 import Lights from "../CarouselTwo/Lights";
 import Entertainment from "../CarouselTwo/Entertainment";
 import HowTo from "../CarouselTwo/HowTo";
 import GLCommunity from "../CarouselTwo/GLCommunity";
-import { FIRESTORE_DB } from "@/FirebaseConfig";
-import VideoSDK from "../CarouselTwo/VideoSDK";
+// import { FIRESTORE_DB } from "@/FirebaseConfig";
+import BackgroundImage from "../CarouselTwo/BackgroundImage";
+// import VideoSDK from "../CarouselTwo/VideoSDK";
 
 const { width: viewportWidth, height: viewportHeight } =
   Dimensions.get("window");
@@ -32,13 +35,13 @@ const data: Item[] = [
   {
     title: "ACTIVITIES",
     icon: "weight-lifter",
-    component: <Activities />,
+    component: <Activities2 />,
     prompt: "Join an Activity?",
   },
   {
     title: "VIDEO CALL",
     icon: "phone",
-    component: <VideoSDK />,
+    component: <VideoCall />,
     prompt: "Make a Video Call?",
   },
   {
@@ -130,6 +133,8 @@ const Home: React.FC = () => {
 
   return (
     <View style={styles.container}>
+       {/* <Image source={require('../../../assets/images/garden-loft-logo-outline.png')} style={{ width: 155, height: 72 }} /> */}
+       {/* <BackgroundImage/> */}
       <Carousel style={styles.carousel1}
         layout={"default"}
         data={data}
@@ -182,6 +187,7 @@ const styles = StyleSheet.create({
 prompt: {
     fontSize: 30,
     marginBottom: 15,
+    marginTop: -10,
   },
   item: {
     width: viewportWidth * 0.17,

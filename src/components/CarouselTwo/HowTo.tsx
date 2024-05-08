@@ -85,6 +85,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     flexDirection: 'column',
     gap: 25,
+    shadowOffset: {
+      width: 6,
+      height: 2,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 12,
+    elevation: 10,
+
   },
   prompt: {
     fontSize: 30,
