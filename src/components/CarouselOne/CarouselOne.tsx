@@ -81,7 +81,9 @@ const Home: React.FC = () => {
   };
 
 
-
+  const handleCardPress = (index: number) => {
+    scrollViewRef.current?.snapToItem(index);
+  };
 
   const renderItem = ({ item, index }: { item: Item; index: number }) => (
     <TouchableOpacity onPress={() => handleCardPress(item, index)}>
@@ -120,16 +122,17 @@ const Home: React.FC = () => {
     </TouchableOpacity>
   );
 
-  const handleCardPress = (item: Item, index: number) => {
-    if (item.component) {
-      // Render component if available
+  
+  // const handleCardPress = (item: Item, index: number) => {
+  //   if (item.component) {
+  //     // Render component if available
       
-      // setShowVideoCall(false);
-    } else {
-      // setShowVideoCall(item.title === "VIDEO CALL");
-    }
-    scrollViewRef.current?.snapToItem(index);
-  };
+  //     // setShowVideoCall(false);
+  //   } else {
+  //     // setShowVideoCall(item.title === "VIDEO CALL");
+  //   }
+  //   scrollViewRef.current?.snapToItem(index);
+  // };
 
   return (
     <View style={styles.container}>
