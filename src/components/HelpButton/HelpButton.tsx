@@ -81,7 +81,7 @@ const HelpButton: React.FC = (() => {
       <TouchableOpacity onPress={handleCallSupport} style={{ backgroundColor: '#59ACCE', padding: 5, paddingLeft: 10, borderRadius: 7, flexDirection: "row", }}> */}
       {/* <Image source={require('../../../assets/images/garden-loft-logo-outline.png')} style={{ width: 155, height: 72 }} /> */}
       <View style={styles.container2}>
-      <ImageBackground source={image}  resizeMode={"stretch"} style={styles.image}>
+      <ImageBackground source={image}  resizeMode={"cover"} style={styles.image}>
       {/* <BackgroundImage /> */}
       <Text style={styles.Welcome}>Hello {userInfo?.name}</Text>
       </ImageBackground>
@@ -91,7 +91,13 @@ const HelpButton: React.FC = (() => {
         <Text style={{ color: '#2E3E5E',  fontSize: 28, padding: 9, }}>Call Emergency</Text>
         <MaterialCommunityIcons name="hospital-box-outline" marginRight={7} paddingTop= {3} size={50} color="#f3b718" />
       </TouchableOpacity> */}
-      <TouchableOpacity onPress={handleCallSupport} style={{ backgroundColor: '#59ACCE', padding: 5, paddingLeft: 10, borderRadius: 15, flexDirection: "row", alignItems: "center" }}>
+      <TouchableOpacity onPress={handleCallSupport} style={{ backgroundColor: '#59ACCE', padding: 4, paddingLeft: 10, borderRadius: 25, flexDirection: "row", alignItems: "center",   shadowColor: '#000',
+     shadowOffset: {
+       width: 8,
+       height: 7,
+     },
+     shadowOpacity: 0.25,
+     shadowRadius: 6, elevation: 8, }}>
       <Text style={styles.EmergencyButton}>Call Emergency</Text>
       <MaterialCommunityIcons name="hospital-box-outline" style={{ marginRight: 7, paddingTop: 3 }} size={50} color="#f3b718" />
     </TouchableOpacity>
@@ -128,7 +134,7 @@ const styles = StyleSheet.create({
     // backgroundColor: '#59ACCE', 
     color: '#2E3E5E', 
     fontSize: 30, 
-    paddingTop: '1.5%', 
+    paddingTop: '9%', 
     // paddingLeft: 20, 
     borderRadius: 7},
     
@@ -145,10 +151,10 @@ const styles = StyleSheet.create({
      flex: 1,
     //  justifyContent: "center",
     //  alignContent: "center",
-     width: "100%",
-     height: "105%",
-
-    
+     width: "105%",
+     height: "110%",
+     opacity: 0.9,
+     paddingTop: '9%'
     },
   
 });

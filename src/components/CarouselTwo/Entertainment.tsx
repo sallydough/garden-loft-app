@@ -144,6 +144,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginHorizontal: 5,
+    shadowOffset: {
+      width: 6,
+      height: 2,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 12,
+    elevation: 10,
+
   },
   cardText: {
     fontSize: 36,
