@@ -1,194 +1,4 @@
-// import React, { useState, useEffect, useRef } from "react";
-// import {
-//   View,
-//   Text,
-//   TouchableOpacity,
-//   StyleSheet,
-//   Dimensions,
-//   Button,
-//   Linking,
-//   ActivityIndicator,
-//   Platform,
-// } from "react-native";
-// import axios from "axios";
-// import Carousel from "react-native-snap-carousel";
-// import moment from "moment-timezone";
-// import { FontAwesome } from "@expo/vector-icons";
-// import * as Notifications from 'expo-notifications';
-// import { Audio } from 'expo-av';
 
-// const { width: viewportWidth, height: viewportHeight } = Dimensions.get("window");
-
-// interface EventItem {
-//   item: string;
-//   startDate: Date;
-//   endDate?: Date;
-//   zoomLink?: string | null;
-// }
-
-// const Activities2 = () => {
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState<string | null>(null);
-//   const [events, setEvents] = useState<EventItem[]>([]);
-//   const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
-//   const scrollViewRef = useRef(null);
-
-//   useEffect(() => {
-//     registerForPushNotificationsAsync();
-//     fetchEvents();
-//   }, []);
-
-//   const registerForPushNotificationsAsync = async () => {
-//     const { status: existingStatus } = await Notifications.getPermissionsAsync();
-//     let finalStatus = existingStatus;
-//     if (existingStatus !== 'granted') {
-//       const { status } = await Notifications.requestPermissionsAsync();
-//       finalStatus = status;
-//     }
-//     if (finalStatus !== 'granted') {
-//       alert('Failed to get push token for push notification!');
-//       return;
-//     }
-
-//     // Android specific channel for notifications
-//     if (Platform.OS === 'android') {
-//       await Notifications.setNotificationChannelAsync('default', {
-//         name: 'default',
-//         importance: Notifications.AndroidImportance.MAX,
-//         sound: 'default',
-//         vibrationPattern: [0, 250, 250, 250],
-//       });
-//     }
-//   };
-
-//   const fetchEvents = async () => {
-//     try {
-//       const response = await axios.get(
-//         "https://api.signupgenius.com/v2/k/signups/report/filled/47293846/?user_key=UmNrVWhyYWwrVGhtQmdXeVpweTBZZz09"
-//       );
-//       if (!response.data.success) {
-//         throw new Error("Failed to retrieve signed-up activities.");
-//       }
-//       const eventData = response.data.data.signup.map((item) => ({
-//         item: item.item,
-//         startDate: moment.tz(item.startdatestring, "America/Los_Angeles").toDate(),
-//         endDate: item.enddatestring ? moment.tz(item.enddatestring, "America/Los_Angeles").toDate() : undefined,
-//         zoomLink: item.location.includes("Zoom") ? item.location : null,
-//       })).filter(event => new Date(event.startDate) > new Date());
-
-//       eventData.forEach(event => {
-//         scheduleNotification(event);
-//       });
-
-//       setEvents(eventData);
-//       setLoading(false);
-//     } catch (error) {
-//       console.error("Error fetching events: ", error);
-//       setError("Failed to retrieve events. Please try again later.");
-//       setLoading(false);
-//     }
-//   };
-
-//   const scheduleNotification = async (event) => {
-//     const soundObject = new Audio.Sound();
-//     try {
-//       await soundObject.loadAsync(require('./path/to/bell_sound.mp3'));
-//       await soundObject.playAsync();
-//     } catch (error) {
-//       console.log('Error playing sound', error);
-//     }
-
-//     const schedulingOptions = {
-//       content: {
-//         title: "Upcoming Event!",
-//         body: `Your event ${event.item} is starting soon.`,
-//         sound: 'default', // Use the default sound
-//         data: { event },
-//       },
-//       trigger: {
-//         date: new Date(event.startDate.getTime() - 10 * 60 * 1000),
-//       },
-//     };
-//     await Notifications.scheduleNotificationAsync(schedulingOptions);
-//   };
-
-//   if (loading) {
-//     return <ActivityIndicator size="large" color="#0000ff" style={styles.loading} />;
-//   }
-
-//   const renderItem = ({ item, index }) => (
-//     <TouchableOpacity
-//       key={index}
-//       style={[
-//         styles.cardContainer,
-//         { backgroundColor: index === selectedEvent ? "#f3b718" : "#f09030" },
-//       ]}
-//       onPress={() => setSelectedEvent(item)}
-//     >
-//       <Text style={styles.cardText}>{item.item}</Text>
-//       <Text style={styles.cardTextTime}>
-//         {moment(item.startDate).format("dddd, MMMM Do, h:mm a")}
-//       </Text>
-//     </TouchableOpacity>
-//   );
-
-//   return (
-//     <View style={styles.container}>
-//       <Carousel
-//         ref={scrollViewRef}
-//         data={events}
-//         renderItem={renderItem}
-//         sliderWidth={viewportWidth}
-//         itemWidth={viewportWidth * 0.75}
-//       />
-//       {selectedEvent && (
-//         <View style={styles.modal}>
-//           <Text>{selectedEvent.item}</Text>
-//           {selectedEvent.zoomLink && (
-//             <Button title="Join Event" onPress={() => Linking.openURL(selectedEvent.zoomLink)} />
-//           )}
-//           <Button title="Close" onPress={() => setSelectedEvent(null)} />
-//         </View>
-//       )}
-//     </View>
-//   );
-// };
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
-//   modal: {
-//     position: 'absolute',
-//     top: '50%',
-//     left: '50%',
-//     right: '50%',
-//     bottom: '50%',
-//     backgroundColor: 'white',
-//     padding: 20,
-//   },
-//   cardContainer: {
-//     height: 200,
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     backgroundColor: '#f09030',
-//   },
-//   cardText: {
-//     color: '#fff',
-//   },
-//   cardTextTime: {
-//     color: '#fff',
-//   },
-//   loading: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
-// });
-
-// export default Activities2;
 import React, { useState, useEffect, useRef } from "react";
 import {
   View,
@@ -249,26 +59,7 @@ const Activities2: React.FC = () => {
   }, []);
   
 
-  // useEffect(() => {
-  //   registerForPushNotificationsAsync();
-  //   fetchEvents();
-  
-  //   // Listener for foreground notification handling
-  //   const foregroundSubscription = Notifications.addNotificationReceivedListener(notification => {
-  //     Alert.alert("Notification Received", notification.request.content.body);
-  //   });
-  
-  //   // Listener for when the user interacts with the notification (e.g., taps on it)
-  //   const responseSubscription = Notifications.addNotificationResponseReceivedListener(response => {
-  //     Alert.alert("Notification Clicked", response.notification.request.content.body);
-  //   });
-  
-  //   return () => {
-  //     // Cleanup subscriptions when the component is unmounted
-  //     foregroundSubscription.remove();
-  //     responseSubscription.remove();
-  //   };
-  // }, []);
+ 
   
   async function fetchEvents() {
     try {
@@ -339,14 +130,7 @@ const Activities2: React.FC = () => {
         }
     }
 
-    // if (Platform.OS === 'android') {
-    //     Notifications.setNotificationChannelAsync('default', {
-    //         name: 'default',
-    //         importance: Notifications.AndroidImportance.MAX,
-    //         vibrationPattern: [0, 250, 250, 250],
-    //         sound: true,
-    //     });
-    // }
+    
     if (Platform.OS === 'android') {
       await Notifications.setNotificationChannelAsync('default', {
         name: 'default',
@@ -357,9 +141,6 @@ const Activities2: React.FC = () => {
     }
     
 }
-
-
-   
 
 
   const scrollViewRef = useRef<CarouselStatic<EventItem> | null>(null);
@@ -471,25 +252,6 @@ const Activities2: React.FC = () => {
     });
   };
   
-
-
-//   const scheduleNotification = async (event) => {
-//     const schedulingOptions = {
-//         content: {
-//             title: "Upcoming Event!",
-//             body: `Your event ${event.item} is starting soon.`,
-//             sound: true, // Use the default sound
-//             data: { event },
-//         },
-//         trigger: {
-//             date: new Date(event.startDate.getTime() - 10 * 60 * 1000),
-//         },
-//     };
-//     console.log("Scheduling notification:", schedulingOptions);
-//     await Notifications.scheduleNotificationAsync(schedulingOptions);
-// };
-
-
 
   return (
     <View style={styles.container}>

@@ -81,7 +81,7 @@ const HelpButton: React.FC = (() => {
       <TouchableOpacity onPress={handleCallSupport} style={{ backgroundColor: '#59ACCE', padding: 5, paddingLeft: 10, borderRadius: 7, flexDirection: "row", }}> */}
       {/* <Image source={require('../../../assets/images/garden-loft-logo-outline.png')} style={{ width: 155, height: 72 }} /> */}
       <View style={styles.container2}>
-      <ImageBackground source={image}  resizeMode={"cover"} style={styles.image}>
+      <ImageBackground source={image}  resizeMode={"contain"} style={styles.image}>
       {/* <BackgroundImage /> */}
       <Text style={styles.Welcome}>Hello {userInfo?.name}</Text>
       </ImageBackground>
@@ -91,7 +91,8 @@ const HelpButton: React.FC = (() => {
         <Text style={{ color: '#2E3E5E',  fontSize: 28, padding: 9, }}>Call Emergency</Text>
         <MaterialCommunityIcons name="hospital-box-outline" marginRight={7} paddingTop= {3} size={50} color="#f3b718" />
       </TouchableOpacity> */}
-      <TouchableOpacity onPress={handleCallSupport} style={{ backgroundColor: '#59ACCE', padding: 4, paddingLeft: 10, borderRadius: 25, flexDirection: "row", alignItems: "center",   shadowColor: '#000',
+       <View style={styles.containerButton}>
+      <TouchableOpacity onPress={handleCallSupport} style={{ backgroundColor: '#59ACCE', padding: 4, paddingLeft: 10, borderRadius: 15, flexDirection: "row", alignItems: "center",   shadowColor: '#000',
      shadowOffset: {
        width: 8,
        height: 7,
@@ -101,6 +102,7 @@ const HelpButton: React.FC = (() => {
       <Text style={styles.EmergencyButton}>Call Emergency</Text>
       <MaterialCommunityIcons name="hospital-box-outline" style={{ marginRight: 7, paddingTop: 3 }} size={50} color="#f3b718" />
     </TouchableOpacity>
+    </View>
       {/* <TouchableOpacity style={styles.logOut} onPress={() => FIREBASE_AUTH.signOut() }><Text style={styles.logOut}>Log Out</Text></TouchableOpacity> */}
      
     </View>
@@ -113,6 +115,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexDirection: "row",
     marginTop: 15,
+    paddingTop: 12,
   },
 
   EmergencyButton: {
@@ -132,10 +135,15 @@ const styles = StyleSheet.create({
   
   Welcome: {
     // backgroundColor: '#59ACCE', 
+    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: "center",
     color: '#2E3E5E', 
-    fontSize: 30, 
-    paddingTop: '9%', 
-    // paddingLeft: 20, 
+    fontSize: 28, 
+    paddingTop: '13%', 
+    marginStart: 25, 
+    width: "100%",
+    // backgroundColor: "red",
     borderRadius: 7},
     
     fullScreen: {
@@ -149,13 +157,27 @@ const styles = StyleSheet.create({
     },
     image: {
      flex: 1,
-    //  justifyContent: "center",
-    //  alignContent: "center",
+     justifyContent: "center",
+     alignContent: "center",
      width: "105%",
-     height: "110%",
-     opacity: 0.9,
-     paddingTop: '9%'
+     height: "145%",
+     opacity: 0.95,
+    //  padding: '3%',
+    // backgroundColor: "grey" ,
+    shadowColor: 'goldenRod',
+    shadowOffset: {
+      width: 12,
+      height: 7,
     },
+    shadowOpacity: 0.4,
+    shadowRadius: 26,
+    elevation: 10,
+
+    },
+
+    // containerButton: {
+    //  ,
+    // }
   
 });
 
