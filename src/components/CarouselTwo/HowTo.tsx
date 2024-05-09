@@ -11,7 +11,6 @@ const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window'
 const HowTo = () => {
   const [videos, setVideos] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isSeasonModalVisible, setIsSeasonModalVisible] = useState(false);
   const [isVideoModalVisible, setIsVideoModalVisible] = useState(false);
   const [selectedVideoId, setSelectedVideoId] = useState('');
   const [isLoading, setIsLoading] = useState(true);
