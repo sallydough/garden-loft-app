@@ -26,6 +26,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const auth = FIREBASE_AUTH;
+  
 
   const signIn = async () => {
     setLoading(true);
@@ -104,6 +105,13 @@ const signUp = async () => {
      <KeyboardAvoidingView behavior="padding"> 
      {/* <Image source={require('../../../assets/images/garden-loft-logo2.png')} style={{ width: 355, height: 172, alignSelf: 'center', marginBottom: 30,}} /> */}
       <Text style={styles.welcome}>Welcome Garden Loft Residents</Text>
+      {/* <TextInput
+        value={name}
+        style={styles.input}
+        placeholder="name"
+        autoCapitalize="none"
+        onChangeText={(text) => setName(text)}
+      ></TextInput> */}
     
       <TextInput
         value={email}
