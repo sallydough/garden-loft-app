@@ -26,6 +26,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const auth = FIREBASE_AUTH;
+  
 
   const signIn = async () => {
     setLoading(true);
@@ -111,6 +112,7 @@ const signUp = async () => {
         autoCapitalize="none"
         onChangeText={(text) => setName(text)}
       ></TextInput> */}
+    
       <TextInput
         value={email}
         style={styles.input}
