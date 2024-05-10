@@ -95,6 +95,12 @@ const HowTo = () => {
         inactiveSlideOpacity={1}
         onSnapToItem={(index) => setActiveIndex(index)}
       />
+        <TouchableOpacity style={styles.arrowLeft} onPress={() => scrollViewRef.current?.snapToPrev()}>
+            <FontAwesome name="angle-left" size={100} color="black" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.arrowRight} onPress={() => scrollViewRef.current?.snapToNext()}>
+            <FontAwesome name="angle-right" size={100} color="black" />
+          </TouchableOpacity>
       <Modal
         animationType="slide"
         transparent={true}
