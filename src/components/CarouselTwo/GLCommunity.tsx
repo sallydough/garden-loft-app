@@ -12,11 +12,11 @@
 
 // const GLCommunity = () => {
 //   const [contacts, setContacts] = useState([
-//     { id: 1, name: 'Elizabeth', phoneNumber: '1234567890', imageUrl: 'https://placekitten.com/200/200', prompt: 'Add Elizabeth?' },
-//     { id: 2, name: 'Shari', phoneNumber: '0987654321', imageUrl: 'https://placekitten.com/200/200', prompt: 'Add Shari?' },
-//     { id: 3, name: 'Pat', phoneNumber: '9876543210', imageUrl: 'https://placekitten.com/200/200', prompt: 'Add Pat?' },
-//     { id: 4, name: 'John', phoneNumber: '0123456789', imageUrl: 'https://placekitten.com/200/200', prompt: 'Add John?' },
-//     { id: 5, name: 'Matthew', phoneNumber: '6789012345', imageUrl: 'https://placekitten.com/200/200', prompt: 'Add Matthew?' },
+//     { id: 1, name: 'Elizabeth', meetingId: '1234567890', imageUrl: 'https://placekitten.com/200/200', prompt: 'Add Elizabeth?' },
+//     { id: 2, name: 'Shari', meetingId: '0987654321', imageUrl: 'https://placekitten.com/200/200', prompt: 'Add Shari?' },
+//     { id: 3, name: 'Pat', meetingId: '9876543210', imageUrl: 'https://placekitten.com/200/200', prompt: 'Add Pat?' },
+//     { id: 4, name: 'John', meetingId: '0123456789', imageUrl: 'https://placekitten.com/200/200', prompt: 'Add John?' },
+//     { id: 5, name: 'Matthew', meetingId: '6789012345', imageUrl: 'https://placekitten.com/200/200', prompt: 'Add Matthew?' },
 //   ]);
 //   const [activeIndex, setActiveIndex] = useState(0);
 //   const scrollViewRef = useRef(null);
@@ -25,7 +25,7 @@
 //     try {
 //       await addDoc(collection(FIRESTORE_DB, "contacts"), {
 //         name: contact.name,
-//         phoneNumber: contact.phoneNumber,
+//         meetingId: contact.meetingId,
 //         imageUrl: contact.imageUrl
 //       });
 //       console.log('Contact added successfully');
@@ -119,11 +119,11 @@
 // const image = require('../../../assets/images/pexels-anna-nekrashevich-8993561.jpg');
 // const GLCommunity = () => {
 //   const [contacts, setContacts] = useState([
-//     { id: 1, name: 'Elizabeth', phoneNumber: '1234567890', imageUrl: image},
-//     { id: 2, name: 'Shari', phoneNumber: '0987654321',imageUrl: image, prompt: 'Add Shari?' },
-//     { id: 3, name: 'Pat', phoneNumber: '9876543210', imageUrl: image, prompt: 'Add Pat?' },
-//     { id: 4, name: 'John', phoneNumber: '0123456789', imageUrl: image, prompt: 'Add John?' },
-//     { id: 5, name: 'Matthew', phoneNumber: '6789012345', imageUrl: image, prompt: 'Add Matthew?' },
+//     { id: 1, name: 'Elizabeth', meetingId: '1234567890', imageUrl: image},
+//     { id: 2, name: 'Shari', meetingId: '0987654321',imageUrl: image, prompt: 'Add Shari?' },
+//     { id: 3, name: 'Pat', meetingId: '9876543210', imageUrl: image, prompt: 'Add Pat?' },
+//     { id: 4, name: 'John', meetingId: '0123456789', imageUrl: image, prompt: 'Add John?' },
+//     { id: 5, name: 'Matthew', meetingId: '6789012345', imageUrl: image, prompt: 'Add Matthew?' },
 //   ]);
 //   const [activeIndex, setActiveIndex] = useState(0);
 //   const scrollViewRef = useRef(null);
@@ -132,7 +132,7 @@
 //     try {
 //       await addDoc(collection(FIRESTORE_DB, "contacts"), {
 //         name: contact.name,
-//         phoneNumber: contact.phoneNumber,
+//         meetingId: contact.meetingId,
 //         imageUrl: contact.imageUrl
 //       });
 //       console.log('Contact added successfully');
@@ -284,11 +284,11 @@ const defaultImage = require('../../../assets/images/pexels-anna-nekrashevich-89
 
 const GLCommunity = () => {
   const [contacts, setContacts] = useState([
-    { id: 1, name: 'Elizabeth', phoneNumber: '1234567890', imageUrl: defaultImage },
-    { id: 2, name: 'Shari', phoneNumber: '0987654321', imageUrl: defaultImage },
-    { id: 3, name: 'Pat', phoneNumber: '9876543210', imageUrl: defaultImage },
-    { id: 4, name: 'John', phoneNumber: '0123456789', imageUrl: defaultImage },
-    { id: 5, name: 'Matthew', phoneNumber: '6789012345', imageUrl: defaultImage },
+    { id: 1, name: 'Elizabeth', meetingId: '1o31-vt61-zxdw', imageUrl: defaultImage },
+    { id: 2, name: 'Shari', meetingId: '2o9t-84vd-l56t', imageUrl: defaultImage },
+    { id: 3, name: 'Pat', meetingId: '35qc-oixz-zvdd', imageUrl: defaultImage },
+    { id: 4, name: 'John', meetingId: '3s2v-9h43-d1ap', imageUrl: defaultImage },
+    { id: 5, name: 'Matthew', meetingId: '42ck-ivw3-71ya', imageUrl: defaultImage },
   ]);
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollViewRef = useRef(null);
@@ -319,7 +319,7 @@ const GLCommunity = () => {
     try {
       await addDoc(collection(FIRESTORE_DB, "contacts"), {
         name: contact.name,
-        phoneNumber: contact.phoneNumber,
+        meetingId: contact.meetingId,
         imageUrl: contact.imageUrl
       });
       Alert.alert('Contact added successfully');
