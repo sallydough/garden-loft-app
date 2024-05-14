@@ -191,6 +191,7 @@ prompt: {
     fontSize: 30,
     marginBottom: 15,
     marginTop: -10,
+    color: "rgb(45, 62, 95)",
   },
   item: {
     width: viewportWidth * 0.17,

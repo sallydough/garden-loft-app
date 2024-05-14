@@ -202,6 +202,8 @@ const Activities2: React.FC = () => {
     }
   };
 
+  
+
   // Renders carousel card items
   const renderItem = ({ item, index }: { item: EventItem; index: number }) => (
     <TouchableOpacity
@@ -279,17 +281,13 @@ const Activities2: React.FC = () => {
           {/* <Text style={styles.prompt}>
             {events[activeIndex].prompt && events[activeIndex].prompt}
           </Text> */}
-
-          <TouchableOpacity style={styles.arrowLeft} onPress={scrollToPrevious}>
-            <FontAwesome name="angle-left" size={124} color="rgb(45, 62, 95)" />
+ <TouchableOpacity style={styles.arrowLeft} onPress={() => scrollViewRef.current?.snapToPrev()}>
+            <FontAwesome name="angle-left" size={100} color="rgb(45, 62, 95)" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.arrowRight} onPress={scrollToNext}>
-            <FontAwesome
-              name="angle-right"
-              size={124}
-              color="rgb(45, 62, 95)"
-            />
+          <TouchableOpacity style={styles.arrowRight} onPress={() => scrollViewRef.current?.snapToNext()}>
+            <FontAwesome name="angle-right" size={100} color="rgb(45, 62, 95)" />
           </TouchableOpacity>
+        
 
           {isModalOpen && selectedEvent && (
             <View style={styles.modalContainer}>
