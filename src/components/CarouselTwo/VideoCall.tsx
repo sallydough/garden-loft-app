@@ -1,23 +1,34 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Modal, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Modal, ScrollView, Image, Alert, PermissionsAndroid, Platform  } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import Carousel from 'react-native-snap-carousel';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FIRESTORE_DB } from "../../../FirebaseConfig";
 import { doc, getDoc } from 'firebase/firestore';
-import YoutubePlayer from 'react-native-youtube-iframe';
+// import YoutubePlayer from 'react-native-youtube-iframe';
 // import VideoSDK from './VideoSDK'
 
 
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
 
+
+const defaultImage = {
+  elizabeth: require('../../../assets/images/pexels-anna-nekrashevich-8993561.jpg'),
+  shari: require('../../../assets/images/portrait2.jpg'),
+  pat: require('../../../assets/images/portrait4.jpg'),
+  john: require('../../../assets/images/portrait3.jpg'),
+  matthew: require('../../../assets/images/portrait5.jpg'),
+};
+
+
 const VideoCallCarousel = () => {
   const [contacts, setContacts] = useState([
-    { id: 'goldenGirls', name: 'Carina', prompt: 'Watch Golden Girls?' },
-    { id: 'jeopardy', name: 'John', prompt: 'Watch Jeopardy?' },
-    { id: 'Wheel Of Fortune', name: 'Jeopardy', prompt: 'Watch Wheel Of Fortune?' },
-    { id: 1, name: 'Carina', phoneNumber: '1234567890',prompt: 'Call Carina?'  },
-    // Add more shows with their unique Firestore document IDs
+    { id: 1, name: 'Carina', meetingId: '1o31-vt61-zxdw', imageUrl: defaultImage.elizabeth },
+    
+    { id: 2, name: 'Sally', meetingId: '2o9t-84vd-l56t', imageUrl: defaultImage.shari },
+    { id: 3, name: 'Meseret', meetingId: '35qc-oixz-zvdd', imageUrl: defaultImage.pat },
+    { id: 4, name: 'Prapti', meetingId: '3s2v-9h43-d1ap', imageUrl: defaultImage.john },
+    { id: 5, name: 'Ruth', meetingId: '42ck-ivw3-71ya', imageUrl: defaultImage.matthew },
   ]);
 
   const [youtubeId, setYoutubeId] = useState('');
@@ -51,7 +62,9 @@ const VideoCallCarousel = () => {
               },]}
       onPress={() => fetchAndPlayVideo(item.id)}
     >
-      <MaterialCommunityIcons name="emoticon" size={94} color="white" />
+      {/* <MaterialCommunityIcons name="emoticon" size={94} color="white" /> */}
+      
+      <Image source={item.imageUrl} style={styles.image} />
       <Text style={styles.cardText}>{item.name}</Text>
     </TouchableOpacity>
   );
@@ -169,6 +182,12 @@ const styles = StyleSheet.create({
         top: '40%',
         right: -25,
         transform: [{ translateY: -50 }],
+      },
+      image: {
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+        marginBottom: 10,
       },
   modalView: {
     margin: 20,
