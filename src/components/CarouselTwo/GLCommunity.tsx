@@ -12,11 +12,11 @@
 
 // const GLCommunity = () => {
 //   const [contacts, setContacts] = useState([
-//     { id: 1, name: 'Elizabeth', phoneNumber: '1234567890', imageUrl: 'https://placekitten.com/200/200', prompt: 'Add Elizabeth?' },
-//     { id: 2, name: 'Shari', phoneNumber: '0987654321', imageUrl: 'https://placekitten.com/200/200', prompt: 'Add Shari?' },
-//     { id: 3, name: 'Pat', phoneNumber: '9876543210', imageUrl: 'https://placekitten.com/200/200', prompt: 'Add Pat?' },
-//     { id: 4, name: 'John', phoneNumber: '0123456789', imageUrl: 'https://placekitten.com/200/200', prompt: 'Add John?' },
-//     { id: 5, name: 'Matthew', phoneNumber: '6789012345', imageUrl: 'https://placekitten.com/200/200', prompt: 'Add Matthew?' },
+//     { id: 1, name: 'Elizabeth', meetingId: '1234567890', imageUrl: 'https://placekitten.com/200/200', prompt: 'Add Elizabeth?' },
+//     { id: 2, name: 'Shari', meetingId: '0987654321', imageUrl: 'https://placekitten.com/200/200', prompt: 'Add Shari?' },
+//     { id: 3, name: 'Pat', meetingId: '9876543210', imageUrl: 'https://placekitten.com/200/200', prompt: 'Add Pat?' },
+//     { id: 4, name: 'John', meetingId: '0123456789', imageUrl: 'https://placekitten.com/200/200', prompt: 'Add John?' },
+//     { id: 5, name: 'Matthew', meetingId: '6789012345', imageUrl: 'https://placekitten.com/200/200', prompt: 'Add Matthew?' },
 //   ]);
 //   const [activeIndex, setActiveIndex] = useState(0);
 //   const scrollViewRef = useRef(null);
@@ -25,7 +25,7 @@
 //     try {
 //       await addDoc(collection(FIRESTORE_DB, "contacts"), {
 //         name: contact.name,
-//         phoneNumber: contact.phoneNumber,
+//         meetingId: contact.meetingId,
 //         imageUrl: contact.imageUrl
 //       });
 //       console.log('Contact added successfully');
@@ -119,11 +119,11 @@
 // const image = require('../../../assets/images/pexels-anna-nekrashevich-8993561.jpg');
 // const GLCommunity = () => {
 //   const [contacts, setContacts] = useState([
-//     { id: 1, name: 'Elizabeth', phoneNumber: '1234567890', imageUrl: image},
-//     { id: 2, name: 'Shari', phoneNumber: '0987654321',imageUrl: image, prompt: 'Add Shari?' },
-//     { id: 3, name: 'Pat', phoneNumber: '9876543210', imageUrl: image, prompt: 'Add Pat?' },
-//     { id: 4, name: 'John', phoneNumber: '0123456789', imageUrl: image, prompt: 'Add John?' },
-//     { id: 5, name: 'Matthew', phoneNumber: '6789012345', imageUrl: image, prompt: 'Add Matthew?' },
+//     { id: 1, name: 'Elizabeth', meetingId: '1234567890', imageUrl: image},
+//     { id: 2, name: 'Shari', meetingId: '0987654321',imageUrl: image, prompt: 'Add Shari?' },
+//     { id: 3, name: 'Pat', meetingId: '9876543210', imageUrl: image, prompt: 'Add Pat?' },
+//     { id: 4, name: 'John', meetingId: '0123456789', imageUrl: image, prompt: 'Add John?' },
+//     { id: 5, name: 'Matthew', meetingId: '6789012345', imageUrl: image, prompt: 'Add Matthew?' },
 //   ]);
 //   const [activeIndex, setActiveIndex] = useState(0);
 //   const scrollViewRef = useRef(null);
@@ -132,7 +132,7 @@
 //     try {
 //       await addDoc(collection(FIRESTORE_DB, "contacts"), {
 //         name: contact.name,
-//         phoneNumber: contact.phoneNumber,
+//         meetingId: contact.meetingId,
 //         imageUrl: contact.imageUrl
 //       });
 //       console.log('Contact added successfully');
@@ -253,18 +253,23 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image, Alert, PermissionsAndroid, Platform } from 'react-native';
 
-
-
-
 import Carousel from 'react-native-snap-carousel';
 import { FontAwesome } from '@expo/vector-icons';
 import { collection, addDoc, query, getDocs } from 'firebase/firestore';
 import { FIRESTORE_DB } from "../../../FirebaseConfig";
-import { launchImageLibrary } from 'react-native-image-picker';
-import storage from '@react-native-firebase/storage';
+// import { launchImageLibrary } from 'react-native-image-picker';
+// import storage from '@react-native-firebase/storage';
 
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
-const defaultImage = require('../../../assets/images/pexels-anna-nekrashevich-8993561.jpg');
+// const defaultImage = require('../../../assets/images/pexels-anna-nekrashevich-8993561.jpg');
+
+const defaultImage = {
+  elizabeth: require('../../../assets/images/pexels-anna-nekrashevich-8993561.jpg'),
+  shari: require('../../../assets/images/portrait2.jpg'),
+  pat: require('../../../assets/images/portrait4.jpg'),
+  john: require('../../../assets/images/portrait3.jpg'),
+  matthew: require('../../../assets/images/portrait5.jpg'),
+};
 
 // const requestStoragePermission = async () => {
 //   if (Platform.OS === 'android') {
@@ -284,11 +289,12 @@ const defaultImage = require('../../../assets/images/pexels-anna-nekrashevich-89
 
 const GLCommunity = () => {
   const [contacts, setContacts] = useState([
-    { id: 1, name: 'Elizabeth', phoneNumber: '1234567890', imageUrl: defaultImage },
-    { id: 2, name: 'Shari', phoneNumber: '0987654321', imageUrl: defaultImage },
-    { id: 3, name: 'Pat', phoneNumber: '9876543210', imageUrl: defaultImage },
-    { id: 4, name: 'John', phoneNumber: '0123456789', imageUrl: defaultImage },
-    { id: 5, name: 'Matthew', phoneNumber: '6789012345', imageUrl: defaultImage },
+    { id: 1, name: 'Elizabeth', meetingId: '1o31-vt61-zxdw', imageUrl: defaultImage.elizabeth },
+    
+    { id: 2, name: 'Shari', meetingId: '2o9t-84vd-l56t', imageUrl: defaultImage.shari },
+    { id: 3, name: 'Pat', meetingId: '35qc-oixz-zvdd', imageUrl: defaultImage.pat },
+    { id: 4, name: 'John', meetingId: '3s2v-9h43-d1ap', imageUrl: defaultImage.john },
+    { id: 5, name: 'Matthew', meetingId: '42ck-ivw3-71ya', imageUrl: defaultImage.matthew },
   ]);
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollViewRef = useRef(null);
@@ -319,7 +325,7 @@ const GLCommunity = () => {
     try {
       await addDoc(collection(FIRESTORE_DB, "contacts"), {
         name: contact.name,
-        phoneNumber: contact.phoneNumber,
+        meetingId: contact.meetingId,
         imageUrl: contact.imageUrl
       });
       Alert.alert('Contact added successfully');
@@ -329,31 +335,31 @@ const GLCommunity = () => {
       Alert.alert("Error adding contact.");
     }
   };
-  const scrollToNext = () => {
-    if (scrollViewRef.current) {
-      const currentIndex = scrollViewRef.current.currentIndex || 0;
-      const nextIndex = currentIndex + 1;
-      scrollViewRef.current.snapToItem(nextIndex, true, true);
-    }
-  };
+  // const scrollToNext = () => {
+  //   if (scrollViewRef.current) {
+  //     const currentIndex = scrollViewRef.current.currentIndex || 0;
+  //     const nextIndex = currentIndex + 1;
+  //     scrollViewRef.current.snapToItem(nextIndex, true, true);
+  //   }
+  // };
 
-  const scrollToPrevious = () => {
-    if (scrollViewRef.current) {
-      const currentIndex = scrollViewRef.current.currentIndex || 0;
-      const prevIndex = currentIndex - 1;
-      scrollViewRef.current.snapToItem(prevIndex, true, true);
-    }
-  };
+  // const scrollToPrevious = () => {
+  //   if (scrollViewRef.current) {
+  //     const currentIndex = scrollViewRef.current.currentIndex || 0;
+  //     const prevIndex = currentIndex - 1;
+  //     scrollViewRef.current.snapToItem(prevIndex, true, true);
+  //   }
+  // };
 
-  const renderItem = ({ item, index }) => (
+  const renderItem = ({ item }) => (
     <TouchableOpacity
-      key={item.id}
-      style={[styles.cardContainer, {
-        backgroundColor: index === activeIndex ? "#f3b718" : "#f09030",
-      }]}
+    key={item.id}
+    style={[styles.cardContainer, {
+      backgroundColor: item.id === contacts[activeIndex].id ? "#f3b718" : "#f09030",
+    }]}
       onPress={() => handleAddContact(item)}
     >
-      <Image source={defaultImage} style={styles.image} />
+      <Image source={item.imageUrl} style={styles.image} />
       <Text style={styles.cardText}>{item.name}</Text>
       <FontAwesome
         name={item.isAdded ? "check-circle" : "plus-circle"}
@@ -381,12 +387,12 @@ const GLCommunity = () => {
         onSnapToItem={(index) => setActiveIndex(index)}
       />
 
-      <TouchableOpacity style={styles.arrowLeft} onPress={scrollToPrevious}>
-        <FontAwesome name="angle-left" size={150} color="black" />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.arrowRight} onPress={scrollToNext}>
-        <FontAwesome name="angle-right" size={150} color="black" />
-
+<TouchableOpacity style={styles.arrowLeft} onPress={() => scrollViewRef.current?.snapToPrev()}>
+            <FontAwesome name="angle-left" size={100} color="rgb(45, 62, 95)" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.arrowRight} onPress={() => scrollViewRef.current?.snapToNext()}>
+            <FontAwesome name="angle-right" size={100} color="rgb(45, 62, 95)" />
+        
       </TouchableOpacity>
     </View>
   );
