@@ -120,6 +120,7 @@ const signUp = async () => {
         autoCapitalize="none"
         onChangeText={(text) => setEmail(text)}
       ></TextInput>
+      
       <TextInput 
        
         secureTextEntry={true}
